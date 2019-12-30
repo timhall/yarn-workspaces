@@ -1,0 +1,10 @@
+{
+  "name": "lifeline",
+  "version": "0.0.0",
+  "author": "Tim Hall <tim.hall.engr@gmail.com>",
+  "description": "Intelligently build workspace dependencies",
+  "repository": "https://github.com/timhall/yarn-workspaces",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "bin": "bin/lifeline.js"
+}

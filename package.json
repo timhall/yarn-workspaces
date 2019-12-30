@@ -1,0 +1,10 @@
+{
+  "name": "yarn-workspaces",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "prettier": "^1.19.1"
+  }
+}
