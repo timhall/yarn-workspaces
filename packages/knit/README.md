@@ -31,6 +31,9 @@ Example:
   "workspaces": ["packages/*"],
   "scripts": {
     "build": "knit workspace && yarn workspaces run build"
+  },
+  "devDependencies": {
+    "knit": "*"
   }
 }
 ```

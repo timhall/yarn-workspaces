@@ -2,6 +2,19 @@
 
 Cache build output based on source fingerprint.
 
+Example:
+
+```json
+{
+  "scripts": {
+    "build": "lifeline run react-scripts build"
+  },
+  "devDependencies": {
+    "lifeline": "*"
+  }
+}
+```
+
 ## config
 
 `lifeline` accepts config stored as `"lifeline"` in `package.json`, `.lifeline`, or `lifeline.config.js`:
