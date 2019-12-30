@@ -5,6 +5,12 @@
   "description": "Intelligently build workspace dependencies",
   "repository": "https://github.com/timhall/yarn-workspaces",
   "license": "MIT",
-  "main": "dist/index.js",
-  "bin": "bin/knit.js"
+  "main": "lib/knit.js",
+  "bin": "lib/bin/knit.js",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "dependencies": {
+    "mri": "^1.1.4"
+  }
 }

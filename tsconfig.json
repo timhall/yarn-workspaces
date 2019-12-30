@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "strict": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "target": "esnext",
+    "lib": ["es2019"],
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["packages/*/src/**/*.ts", "typings/*.d.ts"],
+  "exclude": ["node_modules"]
+}

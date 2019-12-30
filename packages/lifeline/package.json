@@ -5,6 +5,13 @@
   "description": "Intelligently build workspace dependencies",
   "repository": "https://github.com/timhall/yarn-workspaces",
   "license": "MIT",
-  "main": "dist/index.js",
-  "bin": "bin/lifeline.js"
+  "main": "lib/index.js",
+  "bin": "lib/lifeline.js",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "dependencies": {
+    "cosmiconfig": "^6.0.0",
+    "mri": "^1.1.4"
+  }
 }
