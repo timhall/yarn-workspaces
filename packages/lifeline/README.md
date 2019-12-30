@@ -14,7 +14,7 @@ module.exports = {
 };
 ```
 
-## `lifeline <command>`
+## `lifeline run <command>`
 
 Compute fingerprint for current source and if cached output exists restore it, otherwise run command and cache output.
 
