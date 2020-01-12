@@ -1,25 +1,23 @@
-import mri from 'mri';
+import { cli, commands, run } from '@timhall/cli';
+import { name, version } from '../../package.json';
 
-process.title = 'lifeline';
-process.on('unhandledRejection', handleError);
-process.on('uncaughtException', handleError);
+const subcommands = commands({
+  run: {
+    load: () => import('./lifeline-run'),
+    description: 'Run command with caching'
+  },
+  fingerprint: {
+    load: () => import('./lifeline-fingerprint'),
+    description: 'Compute fingerprint for current source'
+  },
+  cache: {
+    load: () => import('./lifeline-cache'),
+    description: 'Subcommands for caching'
+  }
+});
+const lifeline = cli({ name, version, subcommands });
 
-main()
-  .then(() => process.exit(0))
-  .catch(handleError);
-
-async function main() {
-  const args = mri(process.argv.slice(2), {
-    alias: {
-      v: 'version',
-      h: 'help'
-    }
-  });
-
-  console.log('lifeline', args);
-}
-
-function handleError(error: Error | any) {
-  console.error(error);
-  process.exit(1);
-}
+run(name, async () => {
+  const argv = process.argv.slice(2);
+  await lifeline.run(argv);
+});

@@ -1,25 +1,19 @@
-import mri from 'mri';
+import { cli, commands, run } from '@timhall/cli';
+import { name, version } from '../../package.json';
 
-process.title = 'knit';
-process.on('unhandledRejection', handleError);
-process.on('uncaughtException', handleError);
+const subcommands = commands({
+  dependencies: {
+    load: () => import('./knit-dependencies'),
+    description: 'Build workspace dependencies for the current package'
+  },
+  workspace: {
+    load: () => import('./knit-workspace'),
+    description: 'Build workspace dependencies for the entire workspace'
+  }
+});
+const knit = cli({ name, version, subcommands });
 
-main()
-  .then(() => process.exit(0))
-  .catch(handleError);
-
-async function main() {
-  const args = mri(process.argv.slice(2), {
-    alias: {
-      v: 'version',
-      h: 'help'
-    }
-  });
-
-  console.log('knit', args);
-}
-
-function handleError(error: Error | any) {
-  console.error(error);
-  process.exit(1);
-}
+run(name, async () => {
+  const argv = process.argv.slice(2);
+  await knit.run(argv);
+});
