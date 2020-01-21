@@ -1,9 +1,20 @@
 import dedent from '@timhall/dedent/macro';
+import mri from 'mri';
+import { dependencies } from '../';
 
 const help = dedent`
+  Build workspace dependencies for the current package
+
   Usage: knit dependencies
 `;
 
 export default async function(argv: string[]) {
-  console.log(help);
+  const args = mri(argv, { alias: { h: 'help' } });
+
+  if (args.help) {
+    console.log(help);
+    return;
+  }
+
+  await dependencies();
 }

@@ -1,3 +1,20 @@
-export default async function fingerprint(argv: string[]): Promise<void> {
-  console.log('lifeline fingerprint');
+import dedent from '@timhall/dedent/macro';
+import mri from 'mri';
+import { fingerprint } from '../';
+
+const help = dedent`
+  Compute fingerprint for current source
+
+  Usage: lifeline fingerprint
+`;
+
+export default async function(argv: string[]): Promise<void> {
+  const args = mri(argv, { alias: { h: 'help' } });
+
+  if (args.help) {
+    console.log(help);
+    return;
+  }
+
+  await fingerprint();
 }

@@ -1,7 +1,9 @@
 export function dependencies() {
-  // TODO
+  const dir = process.cwd();
+  console.log('dependencies', dir);
 }
 
 export function workspace() {
-  // TODO
+  const dir = process.cwd();
+  console.log('workspace', dir);
 }
