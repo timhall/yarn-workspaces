@@ -6,7 +6,9 @@ Array [
     "location": ".",
     "mismatchedWorkspaceDependencies": Array [],
     "name": "workspaces",
-    "workspaceDependencies": Array [],
+    "workspaceDependencies": Array [
+      "packages/a",
+    ],
   },
   Object {
     "location": "packages/a",
