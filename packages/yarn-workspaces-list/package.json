@@ -1,22 +1,26 @@
 {
-  "name": "lifeline",
+  "name": "yarn-workspaces-list",
   "version": "0.0.0",
   "author": "Tim Hall <tim.hall.engr@gmail.com>",
-  "description": "Intelligently build workspace dependencies",
+  "description": "yarn workspaces list",
   "repository": {
     "type": "git",
     "url": "https://github.com/timhall/yarn-workspaces.git",
-    "directory": "packages/lifeline"
+    "directory": "packages/yarn-workspaces-list"
   },
   "license": "MIT",
-  "bin": "lib/lifeline.js",
+  "main": "lib/index.js",
+  "bin": {
+    "workspaces-list": "lib/workspaces-list.js"
+  },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "jest"
   },
   "dependencies": {
     "@timhall/cli": "^0.5.0",
     "@timhall/dedent": "^0.8.1",
-    "cosmiconfig": "^6.0.0",
+    "find-yarn-workspace-root": "^1.2.1",
     "mri": "^1.1.4"
   },
   "devDependencies": {}

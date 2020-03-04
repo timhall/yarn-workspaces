@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should list workspaces 1`] = `
+Array [
+  Object {
+    "location": ".",
+    "mismatchedWorkspaceDependencies": Array [],
+    "name": "workspaces",
+    "workspaceDependencies": Array [],
+  },
+  Object {
+    "location": "packages/a",
+    "mismatchedWorkspaceDependencies": Array [],
+    "name": "a",
+    "workspaceDependencies": Array [],
+  },
+  Object {
+    "location": "packages/b",
+    "mismatchedWorkspaceDependencies": Array [],
+    "name": "b",
+    "workspaceDependencies": Array [
+      "packages/a",
+    ],
+  },
+  Object {
+    "location": "packages/c",
+    "mismatchedWorkspaceDependencies": Array [],
+    "name": "c",
+    "workspaceDependencies": Array [
+      "packages/a",
+    ],
+  },
+  Object {
+    "location": "projects/d",
+    "mismatchedWorkspaceDependencies": Array [],
+    "name": "d",
+    "workspaceDependencies": Array [
+      "packages/b",
+      "packages/c",
+    ],
+  },
+]
+`;

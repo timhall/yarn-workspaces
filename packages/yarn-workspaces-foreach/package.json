@@ -1,23 +1,23 @@
 {
-  "name": "lifeline",
+  "name": "yarn-workspaces-foreach",
   "version": "0.0.0",
   "author": "Tim Hall <tim.hall.engr@gmail.com>",
-  "description": "Intelligently build workspace dependencies",
+  "description": "yarn workspaces foreach",
   "repository": {
     "type": "git",
     "url": "https://github.com/timhall/yarn-workspaces.git",
-    "directory": "packages/lifeline"
+    "directory": "packages/yarn-workspaces-foreach"
   },
   "license": "MIT",
-  "bin": "lib/lifeline.js",
+  "index": "lib/index.js",
+  "bin": {
+    "workspaces-foreach": "lib/bin/foreach.js"
+  },
   "scripts": {
     "build": "tsc"
   },
   "dependencies": {
-    "@timhall/cli": "^0.5.0",
-    "@timhall/dedent": "^0.8.1",
-    "cosmiconfig": "^6.0.0",
-    "mri": "^1.1.4"
+    "@timhall/cli": "^0.5.0"
   },
   "devDependencies": {}
 }

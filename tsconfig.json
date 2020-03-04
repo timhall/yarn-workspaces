@@ -2,14 +2,13 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "strict": true,
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
     "target": "esnext",
     "lib": ["es2019"],
     "skipLibCheck": true,
-    "noEmit": true
+    "typeRoots": ["node_modules/@types", "./typings"],
+    "declaration": true
   },
-  "include": ["packages/*/src/**/*.ts", "typings/*.d.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "**/__tests__/*.ts", "**/__fixtures__/*.ts"]
 }

@@ -3,18 +3,21 @@
   "version": "0.0.0",
   "author": "Tim Hall <tim.hall.engr@gmail.com>",
   "description": "Intelligently build workspace dependencies",
-  "repository": "https://github.com/timhall/yarn-workspaces",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/timhall/yarn-workspaces.git",
+    "directory": "packages/knit"
+  },
   "license": "MIT",
-  "main": "lib/knit.js",
-  "bin": "lib/bin/knit.js",
+  "bin": "lib/knit.js",
   "scripts": {
-    "build": "rollup -c"
+    "build": "tsc"
   },
   "dependencies": {
     "@timhall/cli": "^0.5.0",
-    "mri": "^1.1.4"
+    "@timhall/dedent": "^0.8.1",
+    "mri": "^1.1.4",
+    "yarn-workspaces-list": "*"
   },
-  "devDependencies": {
-    "@timhall/dedent": "^0.8.1"
-  }
+  "devDependencies": {}
 }

@@ -1,5 +1,6 @@
 import { cli, commands, run } from '@timhall/cli';
-import { name, version } from '../../package.json';
+
+const { name, version } = require('../../package.json');
 
 const subcommands = commands({
   run: {

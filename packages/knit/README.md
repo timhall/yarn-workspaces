@@ -30,7 +30,7 @@ Example:
   "private": true,
   "workspaces": ["packages/*"],
   "scripts": {
-    "build": "knit workspace && yarn workspaces run build"
+    "build": "knit workspace"
   },
   "devDependencies": {
     "knit": "*"
