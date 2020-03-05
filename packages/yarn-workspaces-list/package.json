@@ -10,8 +10,9 @@
   },
   "license": "MIT",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "bin": {
-    "workspaces-list": "lib/workspaces-list.js"
+    "workspaces-list": "lib/bin/workspaces-list.js"
   },
   "scripts": {
     "build": "tsc",
