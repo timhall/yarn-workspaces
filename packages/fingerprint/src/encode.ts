@@ -1,5 +1,5 @@
 import { HexBase64Latin1Encoding } from 'crypto';
-import { decode as decodeBase, encode as multibase } from 'multibase';
+import { decode as decodeBase, encode as multibase, name as Encoding } from 'multibase';
 import { decode as decodeHash, encode as multihash } from 'multihashes';
 
 const supportedAlgorithms: { [name: string]: string } = {
@@ -7,7 +7,7 @@ const supportedAlgorithms: { [name: string]: string } = {
   sha256: 'sha2-256',
   sha512: 'sha2-512'
 };
-const supportedEncodings: { [name: string]: string } = {
+const supportedEncodings: { [name: string]: Encoding } = {
   hex: 'base16',
   base64: 'base64'
 };

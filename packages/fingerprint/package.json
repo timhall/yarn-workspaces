@@ -26,5 +26,7 @@
     "multibase": "^0.6.0",
     "multihashes": "^0.4.15"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/multibase": "^0.6.0"
+  }
 }

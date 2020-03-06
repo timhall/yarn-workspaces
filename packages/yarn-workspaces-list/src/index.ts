@@ -2,7 +2,10 @@ import { PackageInfo } from './package-info';
 import { list } from './yarn-berry';
 import { info, isClassic } from './yarn-classic';
 
-interface ListOptions {
+export { phasedSort, topologicallySort } from './sort';
+export { PackageInfo };
+
+export interface ListOptions {
   cwd?: string;
 }
 

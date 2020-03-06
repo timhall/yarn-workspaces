@@ -22,7 +22,10 @@
     "@timhall/cli": "^0.5.0",
     "@timhall/dedent": "^0.8.1",
     "find-yarn-workspace-root": "^1.2.1",
-    "mri": "^1.1.4"
+    "mri": "^1.1.4",
+    "toposort": "^2.0.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/toposort": "^2.0.3"
+  }
 }
