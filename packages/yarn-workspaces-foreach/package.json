@@ -21,8 +21,10 @@
   "dependencies": {
     "@timhall/cli": "^0.5.0",
     "@timhall/dedent": "^0.8.2",
+    "find-yarn-workspace-root": "^1.2.1",
     "mri": "^1.1.4",
-    "toposort": "^2.0.2"
+    "toposort": "^2.0.2",
+    "yarn-workspaces-list": "*"
   },
   "devDependencies": {}
 }
