@@ -11,18 +11,15 @@ interface Options {
 }
 
 export async function fingerprintDir(dir: string, options: Options = {}): Promise<string> {
-  const {
-    algorithm = 'sha1',
-    encoding = 'base64' as HexBase64Latin1Encoding,
-
-    // Filter by gitignore by default
-    filter = await createGitignoreFilter(dir)
-  } = options;
+  const { algorithm = 'sha1', encoding = 'base64' as HexBase64Latin1Encoding, filter } = options;
   const hash = createHash(algorithm);
 
-  for await (const { path, stats } of walkDir(dir, { filter })) {
+  // Filter by gitignore by default
+  const walkFilter = filter || (await createGitignoreFilter(dir));
+
+  for await (const { path, stats } of walkDir(dir, { filter: walkFilter })) {
     const fingerprint = stats.isDirectory()
-      ? await fingerprintDir(path, { algorithm, encoding })
+      ? await fingerprintDir(path, { algorithm, encoding, filter })
       : await fingerprintFile(path, { algorithm, encoding });
 
     hash.update(fingerprint);

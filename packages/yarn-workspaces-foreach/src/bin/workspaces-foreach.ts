@@ -30,11 +30,13 @@ run(async () => {
   const jobs = rawJobs ? parseInt(rawJobs) : undefined;
   const command = args._.join(' ');
 
-  await foreach(command, {
+  const { exitCode } = await foreach(command, {
     parallel,
     jobs,
     topological,
     include,
     exclude
   });
+
+  process.exit(exitCode);
 });

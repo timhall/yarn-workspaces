@@ -1,8 +1,10 @@
 import * as assert from 'assert';
+import execa, { ExecaChildProcess } from 'execa';
 import findWorkspaceRoot from 'find-yarn-workspace-root';
 import { cpus } from 'os';
 import pLimit from 'p-limit';
 import { join } from 'path';
+import { Transform } from 'stream';
 import { listWorkspaces, phasedSort, topologicallySort } from 'yarn-workspaces-list';
 
 interface ForeachOptions {
@@ -14,7 +16,16 @@ interface ForeachOptions {
   exclude?: string[];
 }
 
-export async function foreach(command: string, options: ForeachOptions = {}): Promise<void> {
+interface ForeachResult {
+  exitCode: 0 | 1;
+  // TODO stdout: string | Buffer;
+  // TODO stderr: string | Buffer;
+}
+
+export async function foreach(
+  command: string,
+  options: ForeachOptions = {}
+): Promise<ForeachResult> {
   const {
     cwd = process.cwd(),
     parallel = false,
@@ -53,20 +64,41 @@ export async function foreach(command: string, options: ForeachOptions = {}): Pr
 
   const concurrency = parallel ? jobs : 1;
   const limit = pLimit(concurrency);
+  let nonZeroExitCode = false;
 
   for (const phase of phases) {
     await Promise.all(
       phase.map(async pkg => {
         const location = join(root!, pkg.location);
-        return limit(() => runCommand(location, command));
+        return limit(async () => {
+          const subprocess = runCommand(location, command);
+
+          // TODO interleaved option that buffers stdout/stderr until finished
+          const prefix = prefixStream(pkg.name);
+          subprocess.stdout?.pipe(prefix).pipe(process.stdout);
+          subprocess.stderr?.pipe(prefix).pipe(process.stderr);
+
+          const { exitCode } = await subprocess;
+          if (exitCode !== 0) nonZeroExitCode = true;
+        });
       })
     );
   }
+
+  return { exitCode: nonZeroExitCode ? 1 : 0 };
 }
 
-async function runCommand(location: string, command: string): Promise<void> {
-  // TODO
-  console.log('run', location, command);
+function runCommand(location: string, command: string): ExecaChildProcess {
+  return execa.command(command, { cwd: location, preferLocal: true });
+}
 
-  await new Promise(resolve => setTimeout(resolve, 1000));
+function prefixStream(name: string): Transform {
+  const prefix = Buffer.from(`[${name}]`);
+
+  return new Transform({
+    transform(chunk, encoding, callback) {
+      const value = Buffer.from(chunk, encoding as BufferEncoding);
+      callback(null, Buffer.concat([prefix, value]));
+    }
+  });
 }

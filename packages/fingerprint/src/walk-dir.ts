@@ -11,6 +11,7 @@ export interface PathProperties {
 export interface WalkOptions {
   filter?: Filter;
 }
+
 export async function* walkDir(
   dir: string,
   options: WalkOptions = {}

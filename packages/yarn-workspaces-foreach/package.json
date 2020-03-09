@@ -21,6 +21,7 @@
   "dependencies": {
     "@timhall/cli": "^0.5.0",
     "@timhall/dedent": "^0.8.2",
+    "execa": "^4.0.0",
     "find-yarn-workspace-root": "^1.2.1",
     "mri": "^1.1.4",
     "p-limit": "^2.2.2",
