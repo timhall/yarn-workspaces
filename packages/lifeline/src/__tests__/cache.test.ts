@@ -1,6 +1,6 @@
 import { remove, statSync } from 'fs-extra';
 import { join } from 'path';
-import { add, clear, list, show } from '../cache';
+import { add, clear, evictOutdated, list, show } from '../cache';
 import { Config } from '../config';
 
 const fixtures = join(__dirname, '../__fixtures__');
@@ -35,18 +35,31 @@ test('should list cache', async () => {
   await add('abc', config);
   await add('def', config);
 
-  const expected = {
-    abc: join(cache, 'abc'),
-    def: join(cache, 'def')
-  };
-  expect(await list(config)).toEqual(expected);
+  const value = await list(config);
+  expect(value.abc.path).toEqual(join(cache, 'abc'));
+  expect(value.def.path).toEqual(join(cache, 'def'));
 });
 
 test('should clear cache', async () => {
   await remove(cache);
   await add('abc', config);
-  expect(await list(config)).toEqual({ abc: join(cache, 'abc') });
+  expect((await list(config)).abc.path).toEqual(join(cache, 'abc'));
 
   await clear(config);
   expect(await list(config)).toEqual({});
+});
+
+test('should evict outdated', async () => {
+  await remove(cache);
+  await add('abc', config);
+  await add('def', config);
+  await add('ghi', config);
+
+  let value = await list(config);
+  expect(Object.keys(value)).toEqual(['abc', 'def', 'ghi']);
+
+  await evictOutdated(config, 2);
+
+  value = await list(config);
+  expect(Object.keys(value)).toEqual(['def', 'ghi']);
 });

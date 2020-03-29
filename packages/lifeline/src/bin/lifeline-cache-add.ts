@@ -1,6 +1,7 @@
 import dedent from '@timhall/dedent';
 import mri from 'mri';
 import { add } from '../';
+import { evictOutdated } from '../cache';
 import { loadConfig } from '../config';
 import { fingerprint as fingerprintDir } from '../fingerprint';
 
@@ -22,5 +23,6 @@ export default async function(argv: string[]): Promise<void> {
   const config = await loadConfig(cwd);
   const fingerprint = await fingerprintDir(cwd, config);
 
+  await evictOutdated(config);
   await add(fingerprint, config);
 }
