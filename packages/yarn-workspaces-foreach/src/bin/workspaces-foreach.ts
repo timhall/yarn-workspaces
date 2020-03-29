@@ -5,6 +5,13 @@ import { foreach } from '..';
 
 const help = dedent`
   Usage: workspaces-foreach [options] <command...>
+
+  Options:
+    --parallel / -p           Execute command in parallel
+    --topological / -t        Order execution by dependency tree
+    --jobs / -j               Number of parallel jobs to use
+    --include <workspace>...  Select workspaces to include
+    --exclude <workspace>...  Select workspaces to exclude
 `;
 
 run(async () => {

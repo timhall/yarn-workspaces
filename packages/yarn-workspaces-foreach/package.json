@@ -9,7 +9,7 @@
     "directory": "packages/yarn-workspaces-foreach"
   },
   "license": "MIT",
-  "index": "lib/index.js",
+  "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "bin": {
     "workspaces-foreach": "lib/bin/workspaces-foreach.js"

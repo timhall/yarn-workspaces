@@ -77,9 +77,8 @@ export async function foreach(
           const subprocess = runCommand(location, command);
 
           // TODO interleaved option that buffers stdout/stderr until finished
-          const prefix = prefixStream(pkg.name);
-          subprocess.stdout?.pipe(prefix).pipe(process.stdout);
-          subprocess.stderr?.pipe(prefix).pipe(process.stderr);
+          subprocess.stdout?.pipe(prefixStream(pkg.name)).pipe(process.stdout);
+          subprocess.stderr?.pipe(prefixStream(pkg.name)).pipe(process.stderr);
 
           const { exitCode } = await subprocess;
           if (exitCode !== 0) nonZeroExitCode = true;
@@ -96,7 +95,7 @@ function runCommand(location: string, command: string): ExecaChildProcess {
 }
 
 function prefixStream(name: string): Transform {
-  const prefix = Buffer.from(`[${name}]`);
+  const prefix = Buffer.from(`[${name}] `);
 
   return new Transform({
     transform(chunk, encoding, callback) {
