@@ -14,6 +14,16 @@ export interface Options {
 export async function dependencies(options: Options = {}) {
   const { cwd = process.cwd(), parallel = true, jobs } = options;
 
+  // Skip knitting while knitting
+  //
+  // e.g. knit workspace -> knit dependencies in each dependency
+  // not necessary since top-level knit is assumed to take care of everything
+  if (process.env.KNIT_ACTIVE) {
+    return;
+  } else {
+    process.env.KNIT_ACTIVE = 'yes';
+  }
+
   // Load package and all workspaces
   const { name } = require(join(cwd, 'package.json'));
   const workspaces = await listWorkspaces({ cwd });
@@ -26,12 +36,31 @@ export async function dependencies(options: Options = {}) {
   }
 
   debug(`Running "yarn build" in ${JSON.stringify(include)}`);
-  await foreach('yarn build', { cwd, parallel, jobs, topological: true, include });
+  try {
+    await foreach('yarn build', { cwd, parallel, jobs, topological: true, include });
+  } catch (error) {
+    throw error;
+  } finally {
+    delete process.env.KNIT_ACTIVE;
+  }
 }
 
 export async function workspace(options: Options = {}) {
   const { cwd = process.cwd(), parallel = true, jobs } = options;
-  await foreach('yarn build', { cwd, parallel, jobs, topological: true });
+
+  if (process.env.KNIT_ACTIVE) {
+    return;
+  } else {
+    process.env.KNIT_ACTIVE = 'yes';
+  }
+
+  try {
+    await foreach('yarn build', { cwd, parallel, jobs, topological: true });
+  } catch (error) {
+    throw error;
+  } finally {
+    delete process.env.KNIT_ACTIVE;
+  }
 }
 
 function filterByDependencies(workspaces: PackageInfo[], name: string): PackageInfo[] {
