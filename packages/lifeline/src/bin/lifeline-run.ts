@@ -24,5 +24,5 @@ export default async function(argv: string[]): Promise<void> {
   const command = args._;
   const config = await loadConfig(cwd);
 
-  await run(command, config, { cwd });
+  await run(command.join(' '), config, { cwd });
 }

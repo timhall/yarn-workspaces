@@ -1,10 +1,12 @@
 import { cosmiconfig } from 'cosmiconfig';
+import _debug from 'debug';
 import findCacheDir from 'find-cache-dir';
 import findWorkspaceRoot from 'find-yarn-workspace-root';
-import { dirname, join } from 'path';
+import { dirname, join, resolve } from 'path';
+
+const debug = _debug('lifeline:config');
 
 export interface Config {
-  name: string;
   base: string;
   cache: string;
   source?: string[];
@@ -15,37 +17,40 @@ const explorer = cosmiconfig('lifeline');
 const DEFAULT_OUTPUT = 'dist';
 
 export async function loadConfig(cwd = process.cwd()): Promise<Config> {
-  let name;
-  try {
-    ({ name } = require('./package.json'));
-  } catch (error) {
-    throw new Error(`Expected package.json in given directory "${cwd}"`);
-  }
-
   // First, look for config at package level
   const maybePackageConfig = await explorer.search(cwd);
-  if (
-    maybePackageConfig &&
-    maybePackageConfig?.config.cacheDir &&
-    maybePackageConfig?.config.outDir
-  ) {
-    return maybePackageConfig.config;
-  }
+  debug(
+    `[package] (${cwd}) ${
+      maybePackageConfig ? JSON.stringify(maybePackageConfig.config) : 'Not Found'
+    } `
+  );
 
   // Next, look for config at root
   const workspaceRootPath = findWorkspaceRoot(cwd);
-  const maybeRootConfig = workspaceRootPath && (await explorer.search(workspaceRootPath))?.config;
-
-  const cacheCwd = workspaceRootPath || cwd;
-  const cache =
-    maybePackageConfig?.config.cache ||
-    maybeRootConfig?.cache ||
-    findCacheDir({ name: 'lifeline', cwd: cacheCwd }) ||
-    join(cacheCwd, '.cache');
+  const maybeRootConfig = workspaceRootPath ? await explorer.search(workspaceRootPath) : null;
+  debug(
+    `[workspace] (${workspaceRootPath}) ${
+      maybeRootConfig ? JSON.stringify(maybeRootConfig.config) : 'Not Found'
+    }`
+  );
 
   const base = maybePackageConfig ? dirname(maybePackageConfig.filepath) : cwd;
   const source = maybePackageConfig?.config.source;
-  const output = maybePackageConfig?.config.output || join(cwd, DEFAULT_OUTPUT);
+  const output = maybePackageConfig?.config.output
+    ? resolve(base, maybePackageConfig.config.output)
+    : join(cwd, DEFAULT_OUTPUT);
 
-  return { name, base, cache, source, output };
+  const cacheCwd = workspaceRootPath || cwd;
+  const cache =
+    (maybePackageConfig?.config.cache && resolve(base, maybePackageConfig.config.cache)) ||
+    (maybeRootConfig?.config.cache &&
+      resolve(maybeRootConfig.filepath, maybeRootConfig.config.cache)) ||
+    findCacheDir({ name: 'lifeline', cwd: cacheCwd }) ||
+    join(cacheCwd, '.cache', 'lifeline');
+
+  const config = { base, cache, source, output };
+
+  debug(`Loaded ${JSON.stringify(config)}`);
+
+  return config;
 }

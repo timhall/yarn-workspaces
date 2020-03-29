@@ -5,7 +5,7 @@ import { loadConfig } from '../config';
 import { fingerprint as fingerprintDir } from '../fingerprint';
 
 const help = dedent`
-  Add current output to cache for current fingerprint
+  Add current output to cache
 
   Usage: lifeline cache add
 `;

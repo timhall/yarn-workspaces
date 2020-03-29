@@ -21,5 +21,6 @@ export default async function(argv: string[]): Promise<void> {
   const fingerprint = args._[0];
   const config = await loadConfig(cwd);
 
-  await show(fingerprint, config);
+  const directory = await show(fingerprint, config);
+  console.log(directory);
 }

@@ -1,34 +1,45 @@
+import _debug from 'debug';
+import execa from 'execa';
+import { copy } from 'fs-extra';
 import { add as cacheAdd, show as cacheShow } from './cache';
 import { Config } from './config';
 import { fingerprint as fingerprintDir } from './fingerprint';
+
+const debug = _debug('lifeline:run');
 
 export interface Options {
   cwd?: string;
 }
 
-export async function run(command: string[], config: Config, options: Options = {}) {
+export async function run(command: string, config: Config, options: Options = {}) {
   const { cwd = process.cwd() } = options;
 
   // 1. Check current fingerprint
   const fingerprint = await fingerprintDir(cwd, config);
+  debug(`Fingerprint: ${fingerprint}`);
 
   // 2. Check for fingerprint in cache
   const maybeCachedDir = await cacheShow(fingerprint, config);
 
   // 3. Restore from cache to output
   if (maybeCachedDir) {
-    await move(maybeCachedDir, config.output);
+    debug(`Restoring from cache ${maybeCachedDir}`);
+    await copy(maybeCachedDir, config.output, { overwrite: true });
     return;
   }
 
   // 4. Run command
-  // TODO
+  debug(`Running ${command}`);
+  const subprocess = execa.command(command, { cwd, preferLocal: true });
+  subprocess.stdout?.pipe(process.stdout);
+  subprocess.stderr?.pipe(process.stderr);
+
+  const { exitCode } = await subprocess;
+  if (exitCode !== 0) {
+    debug(`Command exited with ${exitCode}`);
+    process.exit(exitCode);
+  }
 
   // 5. Cache output
-  // TODO
   await cacheAdd(fingerprint, config);
-}
-
-async function move(source: string, target: string) {
-  // TODO
 }

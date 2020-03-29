@@ -4,7 +4,7 @@
     "strict": true,
     "module": "commonjs",
     "moduleResolution": "node",
-    "target": "esnext",
+    "target": "es2019",
     "lib": ["es2019"],
     "skipLibCheck": true,
     "typeRoots": ["node_modules/@types", "./typings"],

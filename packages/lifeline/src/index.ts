@@ -1,2 +1,4 @@
-export { add, clear, list, show } from './cache';
-export { run } from './run';
+export * from './cache';
+export * from './config';
+export * from './fingerprint';
+export * from './run';

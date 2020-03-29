@@ -1,7 +1,19 @@
+import _debug from 'debug';
+import { copy, pathExists, readdir, remove, statSync } from 'fs-extra';
+import { basename, join } from 'path';
 import { Config } from './config';
 
+const debug = _debug('lifeline:cache');
+
 export async function add(fingerprint: string, config: Config) {
-  console.log('add', fingerprint, config);
+  if (!(await pathExists(config.output))) {
+    throw new Error(`[lifeline] Expected output directory "${config.output}" not found`);
+  }
+
+  const cacheDir = join(config.cache, fingerprint);
+
+  debug(`[add] ${config.output} to ${cacheDir}`);
+  await copy(config.output, cacheDir, { overwrite: true });
 }
 
 interface List {
@@ -9,8 +21,22 @@ interface List {
 }
 
 export async function list(config: Config): Promise<List> {
-  console.log('list', config);
-  return {};
+  if (!(await pathExists(config.cache))) {
+    debug(`[list] Nothing cached at ${config.cache}`);
+    return {};
+  }
+
+  const directories = (await readdir(config.cache))
+    .map(name => join(config.cache, name))
+    .filter(path => statSync(path).isDirectory());
+
+  const list: List = {};
+  for (const dir of directories) {
+    const fingerprint = basename(dir);
+    list[fingerprint] = dir;
+  }
+
+  return list;
 }
 
 export async function show(fingerprint: string, config: Config): Promise<string | undefined> {
@@ -19,5 +45,6 @@ export async function show(fingerprint: string, config: Config): Promise<string 
 }
 
 export async function clear(config: Config) {
-  console.log('clear', config.cache);
+  debug(`[clear] ${config.cache}`);
+  await remove(config.cache);
 }
