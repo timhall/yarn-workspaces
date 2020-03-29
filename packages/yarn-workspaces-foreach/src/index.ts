@@ -71,6 +71,9 @@ export async function foreach(
       phase.map(async pkg => {
         const location = join(root!, pkg.location);
         return limit(async () => {
+          // TODO if command = 'run <script>'
+          // check for script in "scripts" and run if defined
+
           const subprocess = runCommand(location, command);
 
           // TODO interleaved option that buffers stdout/stderr until finished

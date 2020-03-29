@@ -4,7 +4,7 @@ import mri from 'mri';
 import { foreach } from '..';
 
 const help = dedent`
-  Usage: workspaces-foreach
+  Usage: workspaces-foreach [options] <command...>
 `;
 
 run(async () => {

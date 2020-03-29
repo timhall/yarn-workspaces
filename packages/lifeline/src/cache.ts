@@ -1,16 +1,23 @@
-export async function add() {
-  const dir = process.cwd();
-  console.log('add', dir);
+import { Config } from './config';
+
+export async function add(fingerprint: string, config: Config) {
+  console.log('add', fingerprint, config);
 }
 
-export async function list() {
-  console.log('list');
+interface List {
+  [fingerprint: string]: string;
 }
 
-export async function show(fingerprint: string) {
-  console.log('show', fingerprint);
+export async function list(config: Config): Promise<List> {
+  console.log('list', config);
+  return {};
 }
 
-export async function clear() {
-  console.log('clear');
+export async function show(fingerprint: string, config: Config): Promise<string | undefined> {
+  const values = await list(config);
+  return values[fingerprint];
+}
+
+export async function clear(config: Config) {
+  console.log('clear', config.cache);
 }

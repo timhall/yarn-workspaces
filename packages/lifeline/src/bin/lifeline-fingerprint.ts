@@ -1,6 +1,6 @@
 import dedent from '@timhall/dedent';
+import { fingerprintDir } from 'fingerprint';
 import mri from 'mri';
-import { fingerprint } from '../';
 
 const help = dedent`
   Compute fingerprint for current source
@@ -16,5 +16,6 @@ export default async function(argv: string[]): Promise<void> {
     return;
   }
 
-  await fingerprint();
+  const fingerprint = await fingerprintDir(process.cwd());
+  console.log(fingerprint);
 }

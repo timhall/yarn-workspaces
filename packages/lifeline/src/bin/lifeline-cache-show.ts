@@ -1,6 +1,7 @@
 import dedent from '@timhall/dedent';
 import mri from 'mri';
 import { show } from '../';
+import { loadConfig } from '../config';
 
 const help = dedent`
   Show cached output directory for fingerprint
@@ -9,6 +10,7 @@ const help = dedent`
 `;
 
 export default async function(argv: string[]): Promise<void> {
+  const cwd = process.cwd();
   const args = mri(argv, { alias: { h: 'help' } });
 
   if (args.help) {
@@ -17,6 +19,7 @@ export default async function(argv: string[]): Promise<void> {
   }
 
   const fingerprint = args._[0];
+  const config = await loadConfig(cwd);
 
-  await show(fingerprint);
+  await show(fingerprint, config);
 }

@@ -17,7 +17,12 @@
     "@timhall/cli": "^0.5.0",
     "@timhall/dedent": "^0.8.1",
     "cosmiconfig": "^6.0.0",
+    "find-cache-dir": "^3.3.1",
+    "find-yarn-workspace-root": "^1.2.1",
+    "fingerprint": "*",
     "mri": "^1.1.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/find-cache-dir": "^3.2.0"
+  }
 }

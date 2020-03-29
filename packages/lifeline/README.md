@@ -22,8 +22,14 @@ Example:
 ```js
 // lifeline.config.js
 module.exports = {
-  source: ["src/**/*.js", "package.json", "package-lock.json"],
-  output: "dist"
+  // (default: uses .gitignore)
+  source: ['src/**/*.js', 'package.json', 'package-lock.json'],
+
+  // (default: dist)
+  output: 'lib',
+
+  // (default: node_modules/.cache)
+  cache: '.cache'
 };
 ```
 
