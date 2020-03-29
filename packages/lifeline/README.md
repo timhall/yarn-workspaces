@@ -37,6 +37,8 @@ module.exports = {
 
 Compute fingerprint for current source and if cached output exists restore it, otherwise run command and cache output.
 
+Use `LIFELINE_DISABLE_CACHE=1` to skip checking the cache for run.
+
 ## `lifeline fingerprint`
 
 Compute fingerprint for current source.

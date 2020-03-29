@@ -22,7 +22,7 @@ export async function run(command: string, config: Config, options: Options = {}
   const maybeCachedDir = await cacheShow(fingerprint, config);
 
   // 3. Restore from cache to output
-  if (maybeCachedDir) {
+  if (maybeCachedDir && !process.env.LIFELINE_DISABLE_CACHE) {
     debug(`Restoring from cache ${maybeCachedDir}`);
     await copy(maybeCachedDir, config.output, { overwrite: true });
     return;
