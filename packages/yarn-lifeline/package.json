@@ -9,8 +9,10 @@
     "directory": "packages/yarn-lifeline"
   },
   "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "bin": {
-    "lifeline": "lib/lifeline.js"
+    "lifeline": "lib/bin/lifeline.js"
   },
   "scripts": {
     "build": "tsc",
@@ -37,5 +39,8 @@
   },
   "yarn-lifeline": {
     "output": "lib"
-  }
+  },
+  "files": [
+    "lib"
+  ]
 }

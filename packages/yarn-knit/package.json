@@ -9,8 +9,10 @@
     "directory": "packages/yarn-knit"
   },
   "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "bin": {
-    "knit": "lib/knit.js"
+    "knit": "lib/bin/knit.js"
   },
   "scripts": {
     "build": "tsc",
@@ -24,5 +26,7 @@
     "yarn-workspaces-foreach": "^0.1.0",
     "yarn-workspaces-list": "^0.1.0"
   },
-  "gitHead": "8ac03facdee4d1043b3c4d0feb4b283432dcdc9c"
+  "files": [
+    "lib"
+  ]
 }

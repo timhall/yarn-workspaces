@@ -27,5 +27,8 @@
   },
   "devDependencies": {
     "@types/toposort": "^2.0.3"
-  }
+  },
+  "files": [
+    "lib"
+  ]
 }

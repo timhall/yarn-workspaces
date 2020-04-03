@@ -28,5 +28,8 @@
   },
   "devDependencies": {
     "@types/multibase": "^0.6.0"
-  }
+  },
+  "files": [
+    "lib"
+  ]
 }
