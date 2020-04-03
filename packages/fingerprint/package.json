@@ -1,8 +1,8 @@
 {
-  "name": "fingerprint",
+  "name": "@timhall/fingerprint",
   "version": "0.1.0",
   "author": "Tim Hall <tim.hall.engr@gmail.com>",
-  "description": "fingerprint directories and files",
+  "description": "Fingerprint directories and files",
   "repository": {
     "type": "git",
     "url": "https://github.com/timhall/yarn-workspaces.git",
@@ -28,6 +28,5 @@
   },
   "devDependencies": {
     "@types/multibase": "^0.6.0"
-  },
-  "gitHead": "79313aa6dd38cc123e4b7b8614c11c529d98b3bf"
+  }
 }

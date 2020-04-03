@@ -3,11 +3,11 @@ import { copy, pathExists, readdir, remove, Stats, statSync } from 'fs-extra';
 import { join } from 'path';
 import { Config } from './config';
 
-const debug = _debug('lifeline:cache');
+const debug = _debug('yarn-lifeline:cache');
 
 export async function add(fingerprint: string, config: Config) {
   if (!(await pathExists(config.output))) {
-    throw new Error(`[lifeline] Expected output directory "${config.output}" not found`);
+    throw new Error(`[yarn-lifeline] Expected output directory "${config.output}" not found`);
   }
 
   const cacheDir = join(config.cache, fingerprint);

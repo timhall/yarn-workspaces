@@ -1,4 +1,4 @@
-# lifeline
+# yarn-lifeline
 
 Cache build output based on source fingerprint.
 
@@ -10,7 +10,7 @@ Example:
     "build": "lifeline run react-scripts build"
   },
   "devDependencies": {
-    "lifeline": "*"
+    "yarn-lifeline": "*"
   }
 }
 ```

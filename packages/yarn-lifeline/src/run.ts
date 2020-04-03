@@ -5,7 +5,7 @@ import { add as cacheAdd, show as cacheShow } from './cache';
 import { Config } from './config';
 import { fingerprint as fingerprintDir } from './fingerprint';
 
-const debug = _debug('lifeline:run');
+const debug = _debug('yarn-lifeline:run');
 
 export interface Options {
   cwd?: string;

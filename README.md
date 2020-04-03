@@ -3,7 +3,7 @@
 Build utilities for yarn workspaces:
 
 - [`yarn-knit`](/packages/yarn-knit) - Intelligently build workspace dependencies
-- [`lifeline`](/packages/lifeline) - Cache build output based on source fingerprint
-- [`fingerprint`](/packages/fingerprint) - Compute hash for directories and files
+- [`yarn-lifeline`](/packages/yarn-lifeline) - Cache build output based on source fingerprint
 - [`yarn-workspaces-foreach`](/packages/yarn-workspaces-foreach) - Run a command on all workspaces
 - [`yarn-workspaces-list`](/packages/yarn-workspaces-list) - List packages and dependencies for workspace
+- [`@timhall/fingerprint`](/packages/fingerprint) - Compute hash for directories and files

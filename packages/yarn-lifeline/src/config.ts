@@ -4,7 +4,7 @@ import findCacheDir from 'find-cache-dir';
 import findWorkspaceRoot from 'find-yarn-workspace-root';
 import { dirname, join, resolve } from 'path';
 
-const debug = _debug('lifeline:config');
+const debug = _debug('yarn-lifeline:config');
 
 export interface Config {
   base: string;
@@ -13,7 +13,7 @@ export interface Config {
   output: string;
 }
 
-const explorer = cosmiconfig('lifeline');
+const explorer = cosmiconfig('yarn-lifeline');
 const DEFAULT_OUTPUT = 'dist';
 
 export async function loadConfig(cwd = process.cwd()): Promise<Config> {

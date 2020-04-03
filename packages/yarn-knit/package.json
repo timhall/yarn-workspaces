@@ -23,5 +23,6 @@
     "mri": "^1.1.4",
     "yarn-workspaces-foreach": "^0.1.0",
     "yarn-workspaces-list": "^0.1.0"
-  }
+  },
+  "gitHead": "8ac03facdee4d1043b3c4d0feb4b283432dcdc9c"
 }

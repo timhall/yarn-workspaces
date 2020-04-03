@@ -1,12 +1,12 @@
 import dedent from '@timhall/dedent';
 import mri from 'mri';
-import { clear } from '../';
+import { show } from '..';
 import { loadConfig } from '../config';
 
 const help = dedent`
-  Clear all cached directories
+  Show cached output directory for fingerprint
 
-  Usage: lifeline cache clear
+  Usage: lifeline cache show <fingerprint>
 `;
 
 export default async function(argv: string[]): Promise<void> {
@@ -18,6 +18,9 @@ export default async function(argv: string[]): Promise<void> {
     return;
   }
 
+  const fingerprint = args._[0];
   const config = await loadConfig(cwd);
-  await clear(config);
+
+  const directory = await show(fingerprint, config);
+  console.log(directory);
 }

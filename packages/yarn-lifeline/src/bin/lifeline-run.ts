@@ -1,6 +1,6 @@
 import dedent from '@timhall/dedent';
 import mri from 'mri';
-import { run } from '../';
+import { run } from '..';
 import { loadConfig } from '../config';
 
 const help = dedent`

@@ -1,12 +1,14 @@
 import dedent from '@timhall/dedent';
 import mri from 'mri';
-import { show } from '../';
+import { add } from '..';
+import { evictOutdated } from '../cache';
 import { loadConfig } from '../config';
+import { fingerprint as fingerprintDir } from '../fingerprint';
 
 const help = dedent`
-  Show cached output directory for fingerprint
+  Add current output to cache
 
-  Usage: lifeline cache show <fingerprint>
+  Usage: lifeline cache add
 `;
 
 export default async function(argv: string[]): Promise<void> {
@@ -18,9 +20,9 @@ export default async function(argv: string[]): Promise<void> {
     return;
   }
 
-  const fingerprint = args._[0];
   const config = await loadConfig(cwd);
+  const fingerprint = await fingerprintDir(cwd, config);
 
-  const directory = await show(fingerprint, config);
-  console.log(directory);
+  await evictOutdated(config);
+  await add(fingerprint, config);
 }
