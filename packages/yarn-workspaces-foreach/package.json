@@ -26,5 +26,6 @@
     "mri": "^1.1.4",
     "p-limit": "^2.2.2",
     "yarn-workspaces-list": "^0.1.0"
-  }
+  },
+  "gitHead": "79313aa6dd38cc123e4b7b8614c11c529d98b3bf"
 }

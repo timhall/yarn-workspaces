@@ -3,7 +3,7 @@ import { join } from 'path';
 import { foreach } from 'yarn-workspaces-foreach';
 import { listWorkspaces, PackageInfo } from 'yarn-workspaces-list';
 
-const debug = _debug('knit');
+const debug = _debug('yarn-knit');
 
 export interface Options {
   cwd?: string;
@@ -18,10 +18,10 @@ export async function dependencies(options: Options = {}) {
   //
   // e.g. knit workspace -> knit dependencies in each dependency
   // not necessary since top-level knit is assumed to take care of everything
-  if (process.env.KNIT_ACTIVE) {
+  if (process.env.YARN_KNIT_ACTIVE) {
     return;
   } else {
-    process.env.KNIT_ACTIVE = 'yes';
+    process.env.YARN_KNIT_ACTIVE = 'yes';
   }
 
   // Load package and all workspaces
@@ -41,17 +41,17 @@ export async function dependencies(options: Options = {}) {
   } catch (error) {
     throw error;
   } finally {
-    delete process.env.KNIT_ACTIVE;
+    delete process.env.YARN_KNIT_ACTIVE;
   }
 }
 
 export async function workspace(options: Options = {}) {
   const { cwd = process.cwd(), parallel = true, jobs } = options;
 
-  if (process.env.KNIT_ACTIVE) {
+  if (process.env.YARN_KNIT_ACTIVE) {
     return;
   } else {
-    process.env.KNIT_ACTIVE = 'yes';
+    process.env.YARN_KNIT_ACTIVE = 'yes';
   }
 
   try {
@@ -59,7 +59,7 @@ export async function workspace(options: Options = {}) {
   } catch (error) {
     throw error;
   } finally {
-    delete process.env.KNIT_ACTIVE;
+    delete process.env.YARN_KNIT_ACTIVE;
   }
 }
 

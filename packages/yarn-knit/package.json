@@ -1,15 +1,17 @@
 {
-  "name": "knit",
+  "name": "yarn-knit",
   "version": "0.1.0",
   "author": "Tim Hall <tim.hall.engr@gmail.com>",
   "description": "Intelligently build workspace dependencies",
   "repository": {
     "type": "git",
     "url": "https://github.com/timhall/yarn-workspaces.git",
-    "directory": "packages/knit"
+    "directory": "packages/yarn-knit"
   },
   "license": "MIT",
-  "bin": "lib/knit.js",
+  "bin": {
+    "knit": "lib/knit.js"
+  },
   "scripts": {
     "build": "tsc",
     "test": "jest"

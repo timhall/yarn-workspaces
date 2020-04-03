@@ -1,4 +1,4 @@
-# knit
+# yarn-knit
 
 Intelligently build workspace dependencies.
 
@@ -14,7 +14,7 @@ Example:
     "start": "knit dependencies && react-scripts start"
   },
   "devDependencies": {
-    "knit": "*"
+    "yarn-knit": "*"
   }
 }
 ```
@@ -33,7 +33,7 @@ Example:
     "build": "knit workspace"
   },
   "devDependencies": {
-    "knit": "*"
+    "yarn-knit": "*"
   }
 }
 ```

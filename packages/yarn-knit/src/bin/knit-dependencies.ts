@@ -1,11 +1,11 @@
 import dedent from '@timhall/dedent';
 import mri from 'mri';
-import { workspace } from '../';
+import { dependencies } from '..';
 
 const help = dedent`
-  Build workspace dependencies for the entire workspace
+  Build workspace dependencies for the current package
 
-  Usage: knit workspace [options]
+  Usage: knit dependencies [options]
 
   Options:
     --parallel / -p   Build in parallel
@@ -27,5 +27,5 @@ export default async function(argv: string[]) {
   const { parallel, jobs: rawJobs } = args;
   const jobs = rawJobs ? parseInt(rawJobs) : undefined;
 
-  await workspace({ parallel, jobs });
+  await dependencies({ parallel, jobs });
 }
