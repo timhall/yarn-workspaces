@@ -1,4 +1,6 @@
-import { fingerprintDir } from 'fingerprint';
+import { Filter, fingerprintDir } from 'fingerprint';
+import { isMatch } from 'micromatch';
+import { relative } from 'path';
 import { Config } from './config';
 
 export async function fingerprint(cwd: string, config: Config): Promise<string> {
@@ -7,6 +9,9 @@ export async function fingerprint(cwd: string, config: Config): Promise<string> 
   return fingerprintDir(cwd, { filter });
 }
 
-function globsToFilter(patterns: string[], base: string): undefined {
-  return;
+function globsToFilter(patterns: string[], base: string): Filter {
+  return (absolutePath: string) => {
+    const relativePath = relative(absolutePath, base);
+    return isMatch(relativePath, patterns);
+  };
 }

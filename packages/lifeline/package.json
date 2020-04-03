@@ -24,12 +24,14 @@
     "find-yarn-workspace-root": "^1.2.1",
     "fingerprint": "*",
     "fs-extra": "^9.0.0",
+    "micromatch": "^4.0.2",
     "mri": "^1.1.4"
   },
   "devDependencies": {
     "@types/debug": "^4.1.5",
     "@types/find-cache-dir": "^3.2.0",
-    "@types/fs-extra": "^8.1.0"
+    "@types/fs-extra": "^8.1.0",
+    "@types/micromatch": "^4.0.1"
   },
   "lifeline": {
     "output": "lib"

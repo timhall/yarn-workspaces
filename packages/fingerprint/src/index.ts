@@ -4,6 +4,8 @@ import { encode } from './encode';
 import { createGitignoreFilter, Filter } from './filter';
 import { walkDir } from './walk-dir';
 
+export { Filter };
+
 interface Options {
   algorithm?: string;
   encoding?: HexBase64Latin1Encoding;
