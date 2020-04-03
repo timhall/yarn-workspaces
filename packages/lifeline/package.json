@@ -1,6 +1,6 @@
 {
   "name": "lifeline",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Tim Hall <tim.hall.engr@gmail.com>",
   "description": "Intelligently build workspace dependencies",
   "repository": {
@@ -22,7 +22,7 @@
     "execa": "^4.0.0",
     "find-cache-dir": "^3.3.1",
     "find-yarn-workspace-root": "^1.2.1",
-    "fingerprint": "*",
+    "fingerprint": "^0.1.0",
     "fs-extra": "^9.0.0",
     "micromatch": "^4.0.2",
     "mri": "^1.1.4"

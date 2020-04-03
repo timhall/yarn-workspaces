@@ -1,6 +1,6 @@
 {
   "name": "yarn-workspaces-list",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Tim Hall <tim.hall.engr@gmail.com>",
   "description": "yarn workspaces list",
   "repository": {
