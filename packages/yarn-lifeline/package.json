@@ -1,6 +1,6 @@
 {
   "name": "yarn-lifeline",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Tim Hall <tim.hall.engr@gmail.com>",
   "description": "Cache build output based on source fingerprint",
   "repository": {
