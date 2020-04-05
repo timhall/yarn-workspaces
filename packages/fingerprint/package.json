@@ -1,6 +1,6 @@
 {
   "name": "@timhall/fingerprint",
-  "version": "0.1.3",
+  "version": "0.1.6",
   "author": "Tim Hall <tim.hall.engr@gmail.com>",
   "description": "Fingerprint directories and files",
   "repository": {
@@ -16,7 +16,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "tsc"
   },
   "dependencies": {
     "@timhall/cli": "^0.5.0",
