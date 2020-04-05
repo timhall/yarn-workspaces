@@ -1,5 +1,5 @@
 import dedent from '@timhall/dedent';
-import { fingerprintDir } from 'fingerprint';
+import { fingerprintDir } from '@timhall/fingerprint';
 import mri from 'mri';
 
 const help = dedent`

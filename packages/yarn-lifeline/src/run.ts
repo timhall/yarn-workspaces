@@ -9,10 +9,11 @@ const debug = _debug('yarn-lifeline:run');
 
 export interface Options {
   cwd?: string;
+  shell?: string | boolean;
 }
 
 export async function run(command: string, config: Config, options: Options = {}) {
-  const { cwd = process.cwd() } = options;
+  const { cwd = process.cwd(), shell = true } = options;
 
   // 1. Check current fingerprint
   const fingerprint = await fingerprintDir(cwd, config);
@@ -30,7 +31,7 @@ export async function run(command: string, config: Config, options: Options = {}
 
   // 4. Run command
   debug(`Running ${command}`);
-  const subprocess = execa.command(command, { cwd, preferLocal: true });
+  const subprocess = execa.command(command, { cwd, shell, preferLocal: true });
   subprocess.stdout?.pipe(process.stdout);
   subprocess.stderr?.pipe(process.stderr);
 

@@ -1,4 +1,4 @@
-import { Filter, fingerprintDir } from 'fingerprint';
+import { Filter, fingerprintDir } from '@timhall/fingerprint';
 import { isMatch } from 'micromatch';
 import { relative } from 'path';
 import { Config } from './config';
