@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { cli, commands, run } from '@timhall/cli';
 
 const { name, version } = require('../../package.json');

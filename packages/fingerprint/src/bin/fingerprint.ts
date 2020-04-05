@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { run } from '@timhall/cli';
 import dedent from '@timhall/dedent';
 import { HexBase64Latin1Encoding } from 'crypto';

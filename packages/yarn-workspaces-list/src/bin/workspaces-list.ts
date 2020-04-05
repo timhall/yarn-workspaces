@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { run } from '@timhall/cli';
 import dedent from '@timhall/dedent';
 import mri from 'mri';
