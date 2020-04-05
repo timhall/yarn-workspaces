@@ -1,6 +1,6 @@
 {
   "name": "@timhall/fingerprint",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "author": "Tim Hall <tim.hall.engr@gmail.com>",
   "description": "Fingerprint directories and files",
   "repository": {
