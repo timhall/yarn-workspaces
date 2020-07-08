@@ -14,7 +14,7 @@ test('should fingerprint file', async () => {
 
 test('should fingerprint directory', async () => {
   const fingerprint = await fingerprintDir(fixture('/'));
-  expect(fingerprint).toEqual('bUVSVDhOb2hnalFCaTUzSEJsSjZjT0tEM2xNQ05wdw==');
+  expect(fingerprint).toEqual('bUVSUTgvWW9HWnN5SDUvRWVzaE01K29CVEdwRTNnZw==');
 });
 
 // (internal)
@@ -28,10 +28,14 @@ test('should use multihash and multibase for hashes', () => {
 });
 
 test('should find .gitignore files', async () => {
-  expect((await findGitignores(fixture('/'))).map(toRelative)).toEqual(['.gitignore']);
+  expect((await findGitignores(fixture('/'))).map(toRelative)).toEqual([
+    '.gitignore',
+    '../../../../.gitignore'
+  ]);
   expect((await findGitignores(fixture('/b/c/d'))).map(toRelative)).toEqual([
     'b/.gitignore',
-    '.gitignore'
+    '.gitignore',
+    '../../../../.gitignore'
   ]);
 });
 
