@@ -4,7 +4,7 @@ import { encode } from './encode';
 import { createGitignoreFilter, Filter } from './filter';
 import { walkDir } from './walk-dir';
 
-export { Filter };
+export { Filter, encode };
 
 interface Options {
   algorithm?: string;
