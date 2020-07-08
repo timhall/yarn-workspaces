@@ -54,8 +54,25 @@ export async function workspace(options: Options = {}) {
     process.env.YARN_KNIT_ACTIVE = 'yes';
   }
 
+  // For `knit workspace` build all workspace packages that are dependencies
+  // of any other workspace packages
+  //
+  // Find dependencies for each workspace package, combine, and unique
+  const workspaces = await listWorkspaces({ cwd });
+  const include = workspaces
+    .map(workspace => filterByDependencies(workspaces, workspace.name))
+    .flat()
+    .map(info => info.name)
+    .filter(unique());
+
+  if (!include.length) {
+    debug(`Found no workspace dependencies`);
+    return;
+  }
+
+  debug(`Running "yarn build" in ${JSON.stringify(include)}`);
   try {
-    await foreach('yarn build', { cwd, parallel, jobs, topological: true });
+    await foreach('yarn build', { cwd, parallel, jobs, topological: true, include });
   } catch (error) {
     throw error;
   } finally {
