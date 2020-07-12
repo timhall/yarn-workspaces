@@ -28,6 +28,7 @@
     "multihashes": "^0.4.15"
   },
   "devDependencies": {
+    "typescript": "^3.8.3",
     "@types/multibase": "^0.6.0"
   },
   "files": [

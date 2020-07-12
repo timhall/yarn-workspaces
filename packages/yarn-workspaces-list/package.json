@@ -27,7 +27,8 @@
     "toposort": "^2.0.2"
   },
   "devDependencies": {
-    "@types/toposort": "^2.0.3"
+    "@types/toposort": "^2.0.3",
+    "typescript": "^3.8.3"
   },
   "files": [
     "lib"

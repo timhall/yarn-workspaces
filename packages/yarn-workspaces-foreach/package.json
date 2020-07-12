@@ -28,6 +28,9 @@
     "p-limit": "^2.2.2",
     "yarn-workspaces-list": "^0.2.0"
   },
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  },
   "files": [
     "lib"
   ]

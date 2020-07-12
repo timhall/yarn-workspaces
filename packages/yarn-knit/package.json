@@ -27,6 +27,9 @@
     "yarn-workspaces-foreach": "^0.2.0",
     "yarn-workspaces-list": "^0.2.0"
   },
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  },
   "files": [
     "lib"
   ]
