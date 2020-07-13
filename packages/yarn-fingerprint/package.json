@@ -22,10 +22,13 @@
   "dependencies": {
     "@timhall/cli": "^0.5.0",
     "@timhall/dedent": "^0.8.2",
+    "debug": "^4.1.1",
     "find-up": "^4.1.0",
     "ignore": "^5.1.8",
     "multibase": "^1.0.1",
-    "multihashes": "^1.0.1"
+    "multihashes": "^1.0.1",
+    "yarn-workspaces-list": "^0.2.0",
+    "find-yarn-workspace-root": "^2.0.0"
   },
   "devDependencies": {
     "typescript": "^3.9.6"

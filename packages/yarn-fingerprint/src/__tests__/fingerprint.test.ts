@@ -1,7 +1,7 @@
 import { join, relative } from 'path';
-import { fingerprintDir, fingerprintFile } from '../';
 import { decode, encode } from '../encode';
 import { createGitignoreFilter, findGitignores } from '../filter';
+import { fingerprintDir, fingerprintFile } from '../fingerprint';
 import { PathProperties, walkDir } from '../walk-dir';
 
 const fixture = (path: string) => join(__dirname, '../__fixtures__', path);
@@ -30,12 +30,12 @@ test('should use multihash and multibase for hashes', () => {
 test('should find .gitignore files', async () => {
   expect((await findGitignores(fixture('/'))).map(toRelative)).toEqual([
     '.gitignore',
-    '../../../../.gitignore'
+    '../../../../.gitignore',
   ]);
   expect((await findGitignores(fixture('/b/c/d'))).map(toRelative)).toEqual([
     'b/.gitignore',
     '.gitignore',
-    '../../../../.gitignore'
+    '../../../../.gitignore',
   ]);
 });
 
