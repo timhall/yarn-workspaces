@@ -10,11 +10,15 @@ import { pathExists } from './fs';
 const debug = _debug('yarn-fingerprint');
 
 export async function fingerprintWorkspace(dir: string, options: Options = {}): Promise<string> {
-  // Fingerprint = workspace + yarn.lock + dependent workspaces
-  const srcFingerprint = await fingerprintDir(dir, options);
-  debug('src', srcFingerprint);
+  const { algorithm, encoding } = options;
 
-  const lockfileFingerprint = await fingerprintLockfile(dir, options);
+  // Fingerprint = workspace + yarn.lock + dependent workspaces
+  const workspaceFingerprint = await fingerprintDir(dir, options);
+  debug('workspace', workspaceFingerprint);
+
+  // Filter likely only applies to workspace,
+  // ignore filter for lockfile and dependencies
+  const lockfileFingerprint = await fingerprintLockfile(dir, { algorithm, encoding });
   debug('lockfile', lockfileFingerprint);
 
   const workspace = await loadWorkspace(dir);
@@ -25,7 +29,7 @@ export async function fingerprintWorkspace(dir: string, options: Options = {}): 
 
   const dependencyFingerprints = await Promise.all(
     dependencies.map(async (dependency) => {
-      const fingerprint = await fingerprintDir(dependency.path, options);
+      const fingerprint = await fingerprintDir(dependency.path, { algorithm, encoding });
       debug(dependency.name, fingerprint);
 
       return fingerprint;
@@ -34,8 +38,8 @@ export async function fingerprintWorkspace(dir: string, options: Options = {}): 
 
   // Compute combined fingerprint from all fingerprints
   const fingerprint = mergeFingerprints(
-    [srcFingerprint, lockfileFingerprint, ...dependencyFingerprints],
-    options
+    [workspaceFingerprint, lockfileFingerprint, ...dependencyFingerprints],
+    { algorithm, encoding }
   );
   debug('fingerprint', dir, fingerprint);
 
