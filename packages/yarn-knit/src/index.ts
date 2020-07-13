@@ -1,7 +1,6 @@
 import _debug from 'debug';
-import { join } from 'path';
 import { foreach } from 'yarn-workspaces-foreach';
-import { listWorkspaces, PackageInfo } from 'yarn-workspaces-list';
+import { listWorkspaces, loadWorkspace } from 'yarn-workspaces-list';
 
 const debug = _debug('yarn-knit');
 
@@ -24,14 +23,13 @@ export async function dependencies(options: Options = {}) {
     process.env.YARN_KNIT_ACTIVE = 'yes';
   }
 
-  // Load package and all workspaces
-  const { name } = require(join(cwd, 'package.json'));
-  const workspaces = await listWorkspaces({ cwd });
+  // Load workspace
+  const workspace = await loadWorkspace(cwd);
 
   // Find dependent workspaces
-  const include: string[] = filterByDependencies(workspaces, name).map(info => info.name);
+  const include = workspace.workspaceDependencies.concat(workspace.transitiveWorkspaceDependencies);
   if (!include.length) {
-    debug(`Found no workspace dependencies for "${name}"`);
+    debug(`Found no workspace dependencies for "${cwd}"`);
     return;
   }
 
@@ -60,9 +58,10 @@ export async function workspace(options: Options = {}) {
   // Find dependencies for each workspace package, combine, and unique
   const workspaces = await listWorkspaces({ cwd });
   const include = workspaces
-    .map(workspace => filterByDependencies(workspaces, workspace.name))
+    .map((workspace) =>
+      workspace.workspaceDependencies.concat(workspace.transitiveWorkspaceDependencies)
+    )
     .flat()
-    .map(info => info.name)
     .filter(unique());
 
   if (!include.length) {
@@ -78,28 +77,6 @@ export async function workspace(options: Options = {}) {
   } finally {
     delete process.env.YARN_KNIT_ACTIVE;
   }
-}
-
-function filterByDependencies(workspaces: PackageInfo[], name: string): PackageInfo[] {
-  const byLocation: { [location: string]: PackageInfo } = {};
-  for (const info of workspaces) {
-    byLocation[info.location] = info;
-  }
-
-  const search = workspaces.find(info => info.name === name);
-  if (!search) {
-    throw new Error(`Unable to find package "${name}" in workspaces`);
-  }
-
-  const dependencies: PackageInfo[] = search.workspaceDependencies
-    .map(location => {
-      const info = byLocation[location];
-      return [info, ...filterByDependencies(workspaces, info.name)];
-    })
-    .flat()
-    .filter(unique());
-
-  return dependencies;
 }
 
 function unique<TValue = any>(): (value: TValue) => boolean {
