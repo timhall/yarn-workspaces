@@ -34,9 +34,6 @@
     "yarn-workspaces-list": "^0.2.0"
   },
   "devDependencies": {
-    "@types/find-cache-dir": "^3.2.0",
-    "@types/fs-extra": "^9.0.1",
-    "@types/micromatch": "^4.0.1",
     "typescript": "^3.9.6"
   },
   "yarn-lifeline": {

@@ -15,7 +15,13 @@
     "printWidth": 100
   },
   "devDependencies": {
+    "@types/debug": "^4.1.5",
+    "@types/find-cache-dir": "^3.2.0",
+    "@types/fs-extra": "^9.0.1",
     "@types/jest": "^26.0.4",
+    "@types/micromatch": "^4.0.1",
+    "@types/multibase": "^0.6.0",
+    "@types/toposort": "^2.0.3",
     "del-cli": "^3.0.1",
     "jest": "^26.1.0",
     "lerna": "^3.22.1",

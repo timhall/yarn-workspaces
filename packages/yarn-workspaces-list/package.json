@@ -27,7 +27,6 @@
     "toposort": "^2.0.2"
   },
   "devDependencies": {
-    "@types/toposort": "^2.0.3",
     "typescript": "^3.9.6"
   },
   "files": [
