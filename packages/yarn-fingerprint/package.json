@@ -1,18 +1,18 @@
 {
-  "name": "@timhall/fingerprint",
+  "name": "yarn-fingerprint",
   "version": "0.2.0",
   "author": "Tim Hall <tim.hall.engr@gmail.com>",
   "description": "Fingerprint directories and files",
   "repository": {
     "type": "git",
     "url": "https://github.com/timhall/yarn-workspaces.git",
-    "directory": "packages/fingerprint"
+    "directory": "packages/yarn-fingerprint"
   },
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "bin": {
-    "fingerprint": "lib/bin/fingerprint.js"
+    "yarn-fingerprint": "lib/bin/yarn-fingerprint.js"
   },
   "scripts": {
     "build": "tsc",

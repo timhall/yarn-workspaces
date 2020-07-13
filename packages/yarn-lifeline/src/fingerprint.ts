@@ -1,10 +1,10 @@
-import { encode, Filter, fingerprintDir, fingerprintFile } from '@timhall/fingerprint';
 import { createHash } from 'crypto';
 import _debug from 'debug';
 import findWorkspaceRoot from 'find-yarn-workspace-root';
 import { pathExists } from 'fs-extra';
 import { isMatch } from 'micromatch';
 import { join, relative } from 'path';
+import { encode, Filter, fingerprintDir, fingerprintFile } from 'yarn-fingerprint';
 import { listWorkspacesByName, loadWorkspace } from 'yarn-workspaces-list';
 import { Config } from './config';
 

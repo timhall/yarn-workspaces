@@ -13,7 +13,7 @@ const help = dedent`
   Usage: fingerprint [<path>] [options]
 
   Options:
-    <path>                  Path to directory or file fingerprint [default: cwd]
+    <path>                  Path to directory or file [default: cwd]
     --algorithm ALGORITHM   Hash algorithm [default: sha1]
     --encoding ENCODING     Hash encoding [default: base64]
 `;

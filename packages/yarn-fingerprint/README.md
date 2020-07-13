@@ -1,9 +1,9 @@
-# @timhall/fingerprint
+# yarn-fingerprint
 
 Calculate a hash fingerprint for directories and files.
 
 ```js
-const { fingerprintDir } = require('@timhall/fingerprint');
+const { fingerprintDir } = require('yarn-fingerprint');
 
 // Calculate a fingerprint of the current working directory using
 // - filter = active .gitignore files
@@ -13,13 +13,13 @@ const a = await fingerprintDir(process.cwd());
 ```
 
 ```js
-const { fingerprintDir, fingerprintFile } = require('@timhall/fingerprint');
+const { fingerprintDir, fingerprintFile } = require('yarn-fingerprint');
 const { join } = require('path');
 
 const b = await fingerprintDir(process.cwd(), {
   algorithm: 'sha256',
   encoding: 'hex',
-  filter: absolutePath => /^\./.test(absolutePath)
+  filter: (absolutePath) => /^\./.test(absolutePath),
 });
 
 const c = await fingerprintFile(join(__dirname, 'file.txt'));
