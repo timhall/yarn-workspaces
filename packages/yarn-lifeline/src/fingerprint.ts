@@ -5,8 +5,8 @@ import findWorkspaceRoot from 'find-yarn-workspace-root';
 import { pathExists } from 'fs-extra';
 import { isMatch } from 'micromatch';
 import { join, relative } from 'path';
+import { listWorkspacesByName, loadWorkspace } from 'yarn-workspaces-list';
 import { Config } from './config';
-import { listWorkspaceDependencies } from './dependencies';
 
 const debug = _debug('yarn-lifeline:fingerprint');
 
@@ -20,9 +20,15 @@ export async function fingerprint(cwd: string, config: Config): Promise<string> 
   const lockfileFingerprint = await fingerprintLockfile(cwd);
   debug('lockfile', lockfileFingerprint);
 
-  const dependencies = await listWorkspaceDependencies(cwd);
+  // Load dependencies and compute fingerprints
+  const byName = await listWorkspacesByName({ cwd });
+  const workspace = await loadWorkspace(cwd);
+  const dependencies = workspace.workspaceDependencies
+    .concat(workspace.transitiveWorkspaceDependencies)
+    .map((name) => byName[name]);
+
   const dependencyFingerprints = await Promise.all(
-    dependencies.map(async dependency => {
+    dependencies.map(async (dependency) => {
       const fingerprint = await fingerprintDir(dependency.path);
       debug(dependency.name, fingerprint);
 
@@ -34,7 +40,7 @@ export async function fingerprint(cwd: string, config: Config): Promise<string> 
   const fingerprint = mergeFingerprints([
     srcFingerprint,
     lockfileFingerprint,
-    ...dependencyFingerprints
+    ...dependencyFingerprints,
   ]);
   debug('fingerprint', cwd, fingerprint);
 
