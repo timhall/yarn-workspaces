@@ -20,7 +20,10 @@ const help = dedent`
 `;
 
 run(async () => {
-  const args = mri(process.argv.slice(2), { alias: { h: 'help', w: 'workspace' } });
+  const args = mri(process.argv.slice(2), {
+    alias: { h: 'help', w: 'workspace' },
+    boolean: ['workspace'],
+  });
 
   if (args.help) {
     console.log(help);

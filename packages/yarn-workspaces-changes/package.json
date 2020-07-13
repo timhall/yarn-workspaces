@@ -1,0 +1,32 @@
+{
+  "name": "yarn-workspaces-changes",
+  "version": "0.2.0",
+  "author": "Tim Hall <tim.hall.engr@gmail.com>",
+  "description": "Workspace-aware change detection",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/timhall/yarn-workspaces.git",
+    "directory": "packages/yarn-workspaces-changes"
+  },
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "bin": {
+    "workspaces-foreach": "lib/bin/workspaces-changes.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "prepublishOnly": "tsc"
+  },
+  "dependencies": {
+    "@timhall/cli": "^0.5.0",
+    "@timhall/dedent": "^0.8.2"
+  },
+  "devDependencies": {
+    "typescript": "^3.9.6"
+  },
+  "files": [
+    "lib"
+  ]
+}
