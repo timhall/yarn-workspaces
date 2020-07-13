@@ -1,5 +1,6 @@
-import { join } from 'path';
+import { join, relative } from 'path';
 import { listWorkspaces } from '../';
+import { Workspace } from '../workspace';
 
 jest.mock('child_process');
 
@@ -8,5 +9,12 @@ test('should list workspaces', async () => {
 
   const list = await listWorkspaces({ cwd });
 
-  expect(list).toMatchSnapshot();
+  expect(list.map(normalize(cwd))).toMatchSnapshot();
 });
+
+function normalize(cwd: string) {
+  return (workspace: Workspace): Workspace => ({
+    ...workspace,
+    path: `absolute(${relative(cwd, workspace.path)})`,
+  });
+}

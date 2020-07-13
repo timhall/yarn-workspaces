@@ -6,39 +6,51 @@ Array [
     "location": ".",
     "mismatchedWorkspaceDependencies": Array [],
     "name": "workspaces",
+    "path": "absolute()",
+    "transitiveWorkspaceDependencies": Array [],
     "workspaceDependencies": Array [
-      "packages/a",
+      "a",
     ],
   },
   Object {
     "location": "packages/a",
     "mismatchedWorkspaceDependencies": Array [],
     "name": "a",
+    "path": "absolute(packages/a)",
+    "transitiveWorkspaceDependencies": Array [],
     "workspaceDependencies": Array [],
   },
   Object {
     "location": "packages/b",
     "mismatchedWorkspaceDependencies": Array [],
     "name": "b",
+    "path": "absolute(packages/b)",
+    "transitiveWorkspaceDependencies": Array [],
     "workspaceDependencies": Array [
-      "packages/a",
+      "a",
     ],
   },
   Object {
     "location": "packages/c",
     "mismatchedWorkspaceDependencies": Array [],
     "name": "c",
+    "path": "absolute(packages/c)",
+    "transitiveWorkspaceDependencies": Array [],
     "workspaceDependencies": Array [
-      "packages/a",
+      "a",
     ],
   },
   Object {
     "location": "projects/d",
     "mismatchedWorkspaceDependencies": Array [],
     "name": "d",
+    "path": "absolute(projects/d)",
+    "transitiveWorkspaceDependencies": Array [
+      "a",
+    ],
     "workspaceDependencies": Array [
-      "packages/b",
-      "packages/c",
+      "b",
+      "c",
     ],
   },
 ]

@@ -1,16 +1,13 @@
-import { exec as _exec } from 'child_process';
 import findWorkspaceRoot from 'find-yarn-workspace-root';
-import { readFile as _readFile } from 'fs';
 import { join } from 'path';
-import { promisify } from 'util';
-import { PackageInfo } from './package-info';
+import { loadTransitiveDependencies } from './dependencies';
+import { exec } from './utils/child-process';
+import { readJson } from './utils/fs';
+import { RelativePath, Workspace } from './workspace';
 
 interface CliOptions {
   cwd?: string;
 }
-
-const exec = promisify(_exec);
-const readFile = promisify(_readFile);
 
 export async function isClassic(options: CliOptions = {}): Promise<boolean> {
   const { cwd = process.cwd() } = options;
@@ -26,68 +23,66 @@ interface JsonLine {
 
 interface Info {
   [name: string]: {
-    location: string;
+    location: RelativePath;
     workspaceDependencies: string[];
     mismatchedWorkspaceDependencies: string[];
   };
 }
 
-export async function info(options: CliOptions = {}): Promise<PackageInfo[]> {
+export async function info(options: CliOptions = {}): Promise<Workspace[]> {
   const { cwd = process.cwd() } = options;
   const { stdout } = await exec(`yarn --json workspaces info`, { cwd });
 
   const lines = stdout
     .split('\n')
     .filter(Boolean)
-    .map(line => JSON.parse(line)) as JsonLine[];
+    .map((line) => JSON.parse(line) as JsonLine);
   const byName = JSON.parse(lines[lines.length - 1].data) as Info;
-  const nameToLocation = (name: string) => byName[name].location;
-
-  if (!Object.keys(byName).length) {
-    return [];
-  }
-
-  const packages: PackageInfo[] = [];
-  for (const [name, info] of Object.entries(byName)) {
-    const { location, workspaceDependencies, mismatchedWorkspaceDependencies } = info;
-
-    packages.push({
-      name,
-      location,
-      workspaceDependencies: workspaceDependencies.map(nameToLocation),
-      mismatchedWorkspaceDependencies: mismatchedWorkspaceDependencies.map(nameToLocation)
-    });
-  }
 
   // `yarn workspaces list` includes workspace root as first item,
   // find the root package.json from one of the found packages
   const workspaceRootPath = findWorkspaceRoot(cwd);
-  if (workspaceRootPath) {
-    const workspaceRoot = await readJson(join(workspaceRootPath, 'package.json'));
-    const workspaceDependencies = Object.keys(workspaceRoot.dependencies || {})
-      .concat(Object.keys(workspaceRoot.devDependencies || {}))
-      .filter(name => byName.hasOwnProperty(name))
-      .map(nameToLocation);
+  if (!workspaceRootPath) {
+    throw new Error(`Could not find workspace root for ${cwd}`);
+  }
 
-    // TODO Clarify difference between two types of workspace dependencies
-    //
-    // From example yarn v2 spike:
-    // "a": "*" -> { ... "mismatchedWorkspaceDependencies": ["a@*"] }
-    // "a": "workspace:*" -> { ... "workspaceDependencies": ["packages/a"] }
-    const mismatchedWorkspaceDependencies: string[] = [];
+  const workspaceRoot = await readJson(join(workspaceRootPath, 'package.json'));
+  const workspaceDependencies = Object.keys(workspaceRoot.dependencies || {})
+    .concat(Object.keys(workspaceRoot.devDependencies || {}))
+    .filter((name) => byName.hasOwnProperty(name));
 
-    packages.unshift({
+  // TODO Clarify difference between two types of workspace dependencies
+  //
+  // From example yarn v2 spike:
+  // "a": "*" -> { ... "mismatchedWorkspaceDependencies": ["a@*"] }
+  // "a": "workspace:*" -> { ... "workspaceDependencies": ["packages/a"] }
+  const mismatchedWorkspaceDependencies: string[] = [];
+
+  const workspaces: Workspace[] = [
+    {
       name: workspaceRoot.name,
+      path: workspaceRootPath,
       location: '.',
       workspaceDependencies,
-      mismatchedWorkspaceDependencies
+      mismatchedWorkspaceDependencies,
+      transitiveWorkspaceDependencies: [],
+    },
+  ];
+
+  for (const [name, info] of Object.entries(byName)) {
+    const { location, workspaceDependencies, mismatchedWorkspaceDependencies } = info;
+
+    workspaces.push({
+      name,
+      path: join(workspaceRootPath, location),
+      location,
+      workspaceDependencies: workspaceDependencies,
+      mismatchedWorkspaceDependencies: mismatchedWorkspaceDependencies,
+      transitiveWorkspaceDependencies: [],
     });
   }
 
-  return packages;
-}
+  loadTransitiveDependencies(workspaces);
 
-async function readJson<TValue = any>(path: string): Promise<TValue> {
-  const data = await readFile(path, 'utf8');
-  return JSON.parse(data);
+  return workspaces;
 }

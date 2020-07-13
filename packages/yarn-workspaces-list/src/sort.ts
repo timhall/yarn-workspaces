@@ -1,42 +1,42 @@
 import toposort from 'toposort';
-import { PackageInfo } from './package-info';
+import { Name, Workspace } from './workspace';
 
-export function topologicallySort(list: PackageInfo[]): PackageInfo[] {
-  const byLocation: { [location: string]: PackageInfo } = {};
-  const graph: Array<[string, string]> = [];
+export function topologicallySort(workspaces: Workspace[]): Workspace[] {
+  const byName: Record<Name, Workspace> = {};
+  const graph: Array<[Name, Name]> = [];
 
-  for (const pkg of list) {
-    byLocation[pkg.location] = pkg;
+  for (const workspace of workspaces) {
+    byName[workspace.name] = workspace;
 
-    for (const dependency of pkg.workspaceDependencies) {
-      graph.push([dependency, pkg.location]);
+    for (const dependency of workspace.workspaceDependencies) {
+      graph.push([dependency, workspace.name]);
     }
   }
 
-  const sorted = toposort(graph);
-  const orphans = list.filter(pkg => !sorted.includes(pkg.location));
-  const sortedPkgs = orphans.concat(sorted.map(location => byLocation[location]));
+  const sorted: Name[] = toposort(graph);
+  const orphans = workspaces.filter((workspace) => !sorted.includes(workspace.name));
+  const sortedWorkspaces = orphans.concat(sorted.map((name) => byName[name]));
 
-  return sortedPkgs;
+  return sortedWorkspaces;
 }
 
-export type Phase = PackageInfo[];
+export type Phase = Workspace[];
 
-export function phasedSort(list: PackageInfo[]): Phase[] {
+export function phasedSort(list: Workspace[]): Phase[] {
   const sorted = topologicallySort(list);
 
   const phases: Phase[] = [[]];
   let currentPhaseIndex = 0;
-  for (const pkg of sorted) {
+  for (const workspace of sorted) {
     const currentPhase = phases[currentPhaseIndex];
-    const hasDependency = currentPhase.some(phasePkg =>
-      pkg.workspaceDependencies.includes(phasePkg.location)
+    const hasDependency = currentPhase.some((phaseWorkspace) =>
+      workspace.workspaceDependencies.includes(phaseWorkspace.name)
     );
 
     if (!hasDependency) {
-      currentPhase.push(pkg);
+      currentPhase.push(workspace);
     } else {
-      phases.push([pkg]);
+      phases.push([workspace]);
       currentPhaseIndex = phases.length - 1;
     }
   }

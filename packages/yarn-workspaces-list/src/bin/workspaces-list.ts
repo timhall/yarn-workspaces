@@ -4,6 +4,7 @@ import { run } from '@timhall/cli';
 import dedent from '@timhall/dedent';
 import mri from 'mri';
 import { listWorkspaces } from '..';
+import { Name, RelativePath, Workspace } from '../workspace';
 
 const help = dedent`
   List all available workspaces as NDJSON (https://github.com/ndjson/ndjson-spec).
@@ -19,9 +20,25 @@ run(async () => {
     return;
   }
 
-  const list = await listWorkspaces();
+  const workspaces = await listWorkspaces();
 
-  for (const pkg of list) {
-    console.log(JSON.stringify(pkg));
+  const byName: Record<Name, Workspace> = {};
+  for (const workspace of workspaces) {
+    byName[workspace.name] = workspace;
+  }
+  const nameToLocation = (name: Name): RelativePath => byName[name].location;
+
+  for (const workspace of workspaces) {
+    const { name, location } = workspace;
+    const info = {
+      name,
+      location,
+      workspaceDependencies: workspace.workspaceDependencies.map(nameToLocation),
+      mismatchedWorkspaceDependencies: workspace.mismatchedWorkspaceDependencies.map(
+        nameToLocation
+      ),
+    };
+
+    console.log(JSON.stringify(info));
   }
 });
