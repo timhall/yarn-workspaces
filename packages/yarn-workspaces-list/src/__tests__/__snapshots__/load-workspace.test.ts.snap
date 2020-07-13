@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should load workspace 1`] = `
+Object {
+  "location": "packages/c",
+  "mismatchedWorkspaceDependencies": Array [],
+  "name": "c",
+  "path": "absolute()",
+  "transitiveWorkspaceDependencies": Array [],
+  "workspaceDependencies": Array [
+    "a",
+  ],
+}
+`;

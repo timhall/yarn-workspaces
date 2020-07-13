@@ -1,5 +1,5 @@
 import { join, relative } from 'path';
-import { listWorkspaces } from '../';
+import { listWorkspaces } from '../list';
 import { Workspace } from '../workspace';
 
 jest.mock('child_process');
