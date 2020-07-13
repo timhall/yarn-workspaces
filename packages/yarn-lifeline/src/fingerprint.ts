@@ -1,74 +1,12 @@
-import { createHash } from 'crypto';
-import _debug from 'debug';
-import findWorkspaceRoot from 'find-yarn-workspace-root';
-import { pathExists } from 'fs-extra';
 import { isMatch } from 'micromatch';
-import { join, relative } from 'path';
-import { encode, Filter, fingerprintDir, fingerprintFile } from 'yarn-fingerprint';
-import { listWorkspacesByName, loadWorkspace } from 'yarn-workspaces-list';
+import { relative } from 'path';
+import { Filter, fingerprintWorkspace } from 'yarn-fingerprint';
 import { Config } from './config';
-
-const debug = _debug('yarn-lifeline:fingerprint');
 
 export async function fingerprint(cwd: string, config: Config): Promise<string> {
   const filter = config.source && globsToFilter(config.source, config.base);
 
-  // Fingerprint is generated from project + yarn.lock + workspace dependencies
-  const srcFingerprint = await fingerprintDir(cwd, { filter });
-  debug('src', srcFingerprint);
-
-  const lockfileFingerprint = await fingerprintLockfile(cwd);
-  debug('lockfile', lockfileFingerprint);
-
-  // Load dependencies and compute fingerprints
-  const byName = await listWorkspacesByName({ cwd });
-  const workspace = await loadWorkspace(cwd);
-  const dependencies = workspace.workspaceDependencies
-    .concat(workspace.transitiveWorkspaceDependencies)
-    .map((name) => byName[name]);
-
-  const dependencyFingerprints = await Promise.all(
-    dependencies.map(async (dependency) => {
-      const fingerprint = await fingerprintDir(dependency.path);
-      debug(dependency.name, fingerprint);
-
-      return fingerprint;
-    })
-  );
-
-  // Compute combined fingerprint from all fingerprints
-  const fingerprint = mergeFingerprints([
-    srcFingerprint,
-    lockfileFingerprint,
-    ...dependencyFingerprints,
-  ]);
-  debug('fingerprint', cwd, fingerprint);
-
-  return fingerprint;
-}
-
-async function fingerprintLockfile(cwd: string): Promise<string> {
-  const root = await findWorkspaceRoot(cwd);
-  if (!root) return '';
-
-  const lockfile = join(root, 'yarn.lock');
-  if (!(await pathExists(lockfile))) return '';
-
-  const fingerprint = await fingerprintFile(lockfile);
-
-  return fingerprint;
-}
-
-function mergeFingerprints(fingerprints: string[]): string {
-  const algorithm = 'sha1';
-  const encoding = 'base64';
-
-  const hash = createHash(algorithm);
-  for (const fingerprint of fingerprints) {
-    hash.update(fingerprint);
-  }
-
-  return encode(hash.digest(), algorithm, encoding);
+  return fingerprintWorkspace(cwd, { filter });
 }
 
 function globsToFilter(patterns: string[], base: string): Filter {
