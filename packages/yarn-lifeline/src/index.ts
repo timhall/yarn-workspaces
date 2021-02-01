@@ -1,4 +1,7 @@
-export * from './cache';
-export * from './config';
-export * from './fingerprint';
-export * from './run';
+export { add, list, show, clear, evictOutdated } from './cache';
+export { loadConfig } from './config'
+export { fingerprint } from './fingerprint';
+export { run } from './run';
+
+export type { Config } from './config';
+export type { Options } from './run'

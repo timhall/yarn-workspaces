@@ -1,5 +1,4 @@
-import { HexBase64Latin1Encoding } from 'crypto';
-import { decode as decodeBase, encode as multibase, name as Encoding } from 'multibase';
+import { decode as decodeBase, encode as multibase, name as BaseEncoding } from 'multibase';
 import { decode as decodeHash, encode as multihash } from 'multihashes';
 
 const supportedAlgorithms: { [name: string]: string } = {
@@ -7,12 +6,14 @@ const supportedAlgorithms: { [name: string]: string } = {
   sha256: 'sha2-256',
   sha512: 'sha2-512'
 };
-const supportedEncodings: { [name: string]: Encoding } = {
+const supportedEncodings: { [name: string]: BaseEncoding } = {
   hex: 'base16',
   base64: 'base64'
 };
 
-export function encode(hash: Buffer, algorithm: string, encoding: HexBase64Latin1Encoding): string {
+export type Encoding = 'hex' | 'base64'
+
+export function encode(hash: Buffer, algorithm: string, encoding: 'hex' | 'base64'): string {
   const supportedAlgorithm = supportedAlgorithms[algorithm];
   if (!supportedAlgorithm) {
     throw new Error(

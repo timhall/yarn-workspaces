@@ -2,9 +2,8 @@
 
 import { run } from '@timhall/cli';
 import dedent from '@timhall/dedent';
-import { HexBase64Latin1Encoding } from 'crypto';
 import mri from 'mri';
-import { fingerprintDir, fingerprintFile, fingerprintWorkspace } from '..';
+import { fingerprintDir, fingerprintFile, fingerprintWorkspace, Encoding } from '..';
 import { lstat, pathExists } from '../fs';
 
 const help = dedent`
@@ -36,7 +35,7 @@ run(async () => {
   }
 
   const { algorithm = 'sha1', encoding = 'base64', workspace: isWorkspace = false } = args;
-  const options = { algorithm: algorithm as string, encoding: encoding as HexBase64Latin1Encoding };
+  const options = { algorithm: algorithm as string, encoding: encoding as Encoding };
 
   const stats = await lstat(path);
   const fingerprint = stats.isDirectory()

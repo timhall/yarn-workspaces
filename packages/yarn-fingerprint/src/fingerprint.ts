@@ -1,17 +1,17 @@
-import { createHash, HexBase64Latin1Encoding } from 'crypto';
+import { createHash } from 'crypto';
 import { createReadStream } from 'fs';
-import { encode } from './encode';
+import { encode, Encoding } from './encode';
 import { createGitignoreFilter, Filter } from './filter';
 import { walkDir } from './walk-dir';
 
 export interface Options {
   algorithm?: string;
-  encoding?: HexBase64Latin1Encoding;
+  encoding?: Encoding;
   filter?: Filter;
 }
 
 export async function fingerprintDir(dir: string, options: Options = {}): Promise<string> {
-  const { algorithm = 'sha1', encoding = 'base64' as HexBase64Latin1Encoding, filter } = options;
+  const { algorithm = 'sha1', encoding = 'base64' as Encoding, filter } = options;
   const hash = createHash(algorithm);
 
   // Filter by gitignore by default
@@ -29,7 +29,7 @@ export async function fingerprintDir(dir: string, options: Options = {}): Promis
 }
 
 export async function fingerprintFile(file: string, options: Options = {}): Promise<string> {
-  const { algorithm = 'sha1', encoding = 'base64' as HexBase64Latin1Encoding } = options;
+  const { algorithm = 'sha1', encoding = 'base64' as Encoding } = options;
 
   const hash = createHash(algorithm);
   const stream = createReadStream(file);
