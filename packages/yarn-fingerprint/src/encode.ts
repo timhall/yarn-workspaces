@@ -1,12 +1,12 @@
-import { decode as decodeBase, encode as multibase, name as BaseEncoding } from 'multibase';
-import { decode as decodeHash, encode as multihash } from 'multihashes';
+import { decode as decodeBase, encode as multibase, BaseName } from 'multibase';
+import { decode as decodeHash, encode as multihash, HashName } from 'multihashes';
 
-const supportedAlgorithms: { [name: string]: string } = {
+const supportedAlgorithms: { [name: string]: HashName } = {
   sha1: 'sha1',
   sha256: 'sha2-256',
   sha512: 'sha2-512'
 };
-const supportedEncodings: { [name: string]: BaseEncoding } = {
+const supportedEncodings: { [name: string]: BaseName } = {
   hex: 'base16',
   base64: 'base64'
 };
@@ -28,10 +28,13 @@ export function encode(hash: Buffer, algorithm: string, encoding: 'hex' | 'base6
 
   const hashed = multihash(hash, supportedAlgorithm);
   const based = multibase(supportedEncoding, hashed);
-
-  return based.toString(encoding);
+  
+  return Buffer.from(based).toString(encoding);
 }
 
 export function decode(data: Buffer): Buffer {
-  return decodeHash(decodeBase(data)).digest;
+  const bytes = decodeBase(data)
+  const hash = decodeHash(Buffer.from(bytes));
+
+  return Buffer.from(hash.digest);
 }

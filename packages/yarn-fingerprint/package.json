@@ -19,14 +19,14 @@
   },
   "dependencies": {
     "@timhall/cli": "^0.5.0",
-    "@timhall/dedent": "^0.8.2",
-    "debug": "^4.1.1",
-    "find-up": "^4.1.0",
+    "@timhall/dedent": "^0.9.1",
+    "debug": "^4.3.1",
+    "find-up": "^5.0.0",
     "find-yarn-workspace-root": "^2.0.0",
     "ignore": "^5.1.8",
-    "multibase": "^1.0.1",
-    "multihashes": "^1.0.1",
-    "yarn-workspaces-list": "^0.2.0"
+    "multibase": "^3.1.1",
+    "multihashes": "^3.1.2",
+    "yarn-workspaces-list": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^4.1.3"
