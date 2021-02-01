@@ -35,7 +35,7 @@ const c = await fingerprintDir(process.cwd(), {
 const d = await fingerprintFile(join(__dirname, 'file.txt'));
 ```
 
-## fingerprintWorkspace(dir: string, [optionss]): Promise<string>
+## fingerprintWorkspace(dir: string, [options]): Promise<string>
 
 Options:
 
