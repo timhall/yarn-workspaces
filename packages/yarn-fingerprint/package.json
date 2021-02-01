@@ -11,9 +11,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "bin": {
-    "yarn-fingerprint": "lib/bin/yarn-fingerprint.js"
-  },
+  "bin": "lib/bin/yarn-fingerprint.js",
   "scripts": {
     "build": "tsc",
     "test": "jest",
