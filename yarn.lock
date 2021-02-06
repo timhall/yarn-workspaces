@@ -319,15 +319,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.7.2":
-  version: 7.10.4
-  resolution: "@babel/runtime@npm:7.10.4"
-  dependencies:
-    regenerator-runtime: ^0.13.4
-  checksum: 68596c6b57dd2381954b754fdca5b200939fc097eca7385bafb61c5b70290812fb7d16cb04e8581ddbfad1b6df8e3d4f4693e58ac6e032c261c4aab90af99a21
-  languageName: node
-  linkType: hard
-
 "@babel/template@npm:^7.10.4, @babel/template@npm:^7.12.7, @babel/template@npm:^7.3.3":
   version: 7.12.7
   resolution: "@babel/template@npm:7.12.7"
@@ -1706,14 +1697,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@timhall/dedent@npm:^0.9.1":
-  version: 0.9.1
-  resolution: "@timhall/dedent@npm:0.9.1"
-  dependencies:
-    babel-plugin-macros: ^2.8.0
-  peerDependencies:
-    "@babel/core": ^7
-  checksum: 212c66a14cfbd749411106b352050cee3038d2b118162e417628d035686534c9df312157117f206521e50d351c7635349027b641f763c84485ef7826b1ab7485
+"@timhall/dedent@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "@timhall/dedent@npm:0.10.0"
+  checksum: 0c3a7771547c1c85b7ef0a63a6c3d1e831948e116e9993f7978299d634e495eccf374871442cab86d2d064794b8497bff565dbfb8492438673a4f3a216048f02
   languageName: node
   linkType: hard
 
@@ -2380,17 +2367,6 @@ __metadata:
     "@types/babel__core": ^7.0.0
     "@types/babel__traverse": ^7.0.6
   checksum: e9c1de0fced1c8220590a0d6f37631f5b975964a8e876f0426fc7fd224f4c154b01f156e87401de47556b873bf4414eb2a9632fb56765f35fc07fe69e5b76d31
-  languageName: node
-  linkType: hard
-
-"babel-plugin-macros@npm:^2.8.0":
-  version: 2.8.0
-  resolution: "babel-plugin-macros@npm:2.8.0"
-  dependencies:
-    "@babel/runtime": ^7.7.2
-    cosmiconfig: ^6.0.0
-    resolve: ^1.12.0
-  checksum: fc4e1224df180d88f44f6f31e448cf51a75c8aa7e0fd828e30c4143f69af6d49ce933f36952478a4e372485db35b6219628bcff16d7f5add724230addbc19e7d
   languageName: node
   linkType: hard
 
@@ -3166,19 +3142,6 @@ __metadata:
     js-yaml: ^3.13.1
     parse-json: ^4.0.0
   checksum: 02d51fb28871d1e6114333f1109e47714e280d60ee8f05cf03bd5a0b9d0954f3d1a99b01edb3ea8147e743b2c9caa3738f745157ebddd5b93efeac324d3d5239
-  languageName: node
-  linkType: hard
-
-"cosmiconfig@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "cosmiconfig@npm:6.0.0"
-  dependencies:
-    "@types/parse-json": ^4.0.0
-    import-fresh: ^3.1.0
-    parse-json: ^5.0.0
-    path-type: ^4.0.0
-    yaml: ^1.7.2
-  checksum: bbd6bbaefe15938107da21f2b5f2d5ede75c7ed4bca5af904d91987c59b050ac95f5e786d9021e16959e0119b36174b190f6040a1daf6fddc75361ab123c0d45
   languageName: node
   linkType: hard
 
@@ -4785,16 +4748,6 @@ fsevents@^2.1.2:
     caller-path: ^2.0.0
     resolve-from: ^3.0.0
   checksum: c95204ecfbea5b6c8fb792faaa765ee2d0c5912eb92485dc9e4f9f40326438b182ac4de8eec769c28dbc35656309fb79d0bae591e7305e7cfd069c2347c745ca
-  languageName: node
-  linkType: hard
-
-"import-fresh@npm:^3.1.0":
-  version: 3.2.1
-  resolution: "import-fresh@npm:3.2.1"
-  dependencies:
-    parent-module: ^1.0.0
-    resolve-from: ^4.0.0
-  checksum: 5ace95063123e8c2e30cfe302421f3ef1598d4fff9763c1b6bbed0ab4e700a16e45078fbfc3f7a8a5c3680e01edf707bca25354dec90a268b9803074e46bc89c
   languageName: node
   linkType: hard
 
@@ -8004,13 +7957,6 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"regenerator-runtime@npm:^0.13.4":
-  version: 0.13.5
-  resolution: "regenerator-runtime@npm:0.13.5"
-  checksum: 8d8ee0eca26e0491085033caf2b1b95379c4db21e38d79cde52bbd4014a3865eee26ec0f4f958682e8600f185f2f5dbcd8c6685b9b9261639767929c19b5bcd2
-  languageName: node
-  linkType: hard
-
 "regex-not@npm:^1.0.0, regex-not@npm:^1.0.2":
   version: 1.0.2
   resolution: "regex-not@npm:1.0.2"
@@ -8173,15 +8119,6 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-resolve@^1.12.0:
-  version: 1.17.0
-  resolution: "resolve@npm:1.17.0"
-  dependencies:
-    path-parse: ^1.0.6
-  checksum: 5e3cdb8cf68c20b0c5edeb6505e7fab20c6776af0cae4b978836e557420aef7bb50acd25339bbb143b7f80533aa1988c7e827a0061aee9c237926a7d2c41f8d0
-  languageName: node
-  linkType: hard
-
 "resolve@patch:resolve@^1.10.0#builtin<compat/resolve>, resolve@patch:resolve@^1.18.1#builtin<compat/resolve>":
   version: 1.19.0
   resolution: "resolve@patch:resolve@npm%3A1.19.0#builtin<compat/resolve>::version=1.19.0&hash=3388aa"
@@ -8189,15 +8126,6 @@ resolve@^1.12.0:
     is-core-module: ^2.1.0
     path-parse: ^1.0.6
   checksum: 188d5167e8578a9af8d194faf382b8f3526aad5145391c24ecdc6246c6fc82c10fc66d6352267f8e93c5977c503d61803169c91b9e2ee36dd2de759915c9b673
-  languageName: node
-  linkType: hard
-
-"resolve@patch:resolve@^1.12.0#builtin<compat/resolve>":
-  version: 1.17.0
-  resolution: "resolve@patch:resolve@npm%3A1.17.0#builtin<compat/resolve>::version=1.17.0&hash=3388aa"
-  dependencies:
-    path-parse: ^1.0.6
-  checksum: 4bcfb568860d0c361fd16c26b6fce429711138ff0de7dd353bdd73fcb5c7eede2f4602d40ccfa08ff45ec7ef9830845eab2021a46036af0a6e5b58bab1ff6399
   languageName: node
   linkType: hard
 
@@ -9920,7 +9848,7 @@ typescript@^4.1.3:
   languageName: node
   linkType: hard
 
-"yaml@npm:^1.10.0, yaml@npm:^1.7.2":
+"yaml@npm:^1.10.0":
   version: 1.10.0
   resolution: "yaml@npm:1.10.0"
   checksum: d4cc9f9724f8d0aebc2cf52e4e6aa7059f12d50deb54b5225d103462fb2af36e5c0bb419101ca4b1f0cd3b4db9e4139cf2c690e863ac6227648d39d6f4e2522c
@@ -9997,7 +9925,7 @@ typescript@^4.1.3:
   resolution: "yarn-fingerprint@workspace:packages/yarn-fingerprint"
   dependencies:
     "@timhall/cli": ^0.5.0
-    "@timhall/dedent": ^0.9.1
+    "@timhall/dedent": ^0.10.0
     debug: ^4.3.1
     find-up: ^5.0.0
     find-yarn-workspace-root: ^2.0.0
@@ -10016,7 +9944,7 @@ typescript@^4.1.3:
   resolution: "yarn-knit@workspace:packages/yarn-knit"
   dependencies:
     "@timhall/cli": ^0.5.0
-    "@timhall/dedent": ^0.9.1
+    "@timhall/dedent": ^0.10.0
     debug: ^4.3.1
     mri: ^1.1.6
     typescript: ^4.1.3
@@ -10032,7 +9960,7 @@ typescript@^4.1.3:
   resolution: "yarn-lifeline@workspace:packages/yarn-lifeline"
   dependencies:
     "@timhall/cli": ^0.5.0
-    "@timhall/dedent": ^0.9.1
+    "@timhall/dedent": ^0.10.0
     cosmiconfig: ^7.0.0
     debug: ^4.3.1
     execa: ^5.0.0
@@ -10054,7 +9982,8 @@ typescript@^4.1.3:
   resolution: "yarn-workspaces-changes@workspace:packages/yarn-workspaces-changes"
   dependencies:
     "@timhall/cli": ^0.5.0
-    "@timhall/dedent": ^0.9.1
+    "@timhall/dedent": ^0.10.0
+    execa: ^5.0.0
     typescript: ^4.1.3
   bin:
     workspaces-foreach: lib/bin/workspaces-changes.js
@@ -10066,7 +9995,7 @@ typescript@^4.1.3:
   resolution: "yarn-workspaces-foreach@workspace:packages/yarn-workspaces-foreach"
   dependencies:
     "@timhall/cli": ^0.5.0
-    "@timhall/dedent": ^0.9.1
+    "@timhall/dedent": ^0.10.0
     execa: ^5.0.0
     find-yarn-workspace-root: ^2.0.0
     mri: ^1.1.6
@@ -10083,7 +10012,7 @@ typescript@^4.1.3:
   resolution: "yarn-workspaces-list@workspace:packages/yarn-workspaces-list"
   dependencies:
     "@timhall/cli": ^0.5.0
-    "@timhall/dedent": ^0.9.1
+    "@timhall/dedent": ^0.10.0
     find-yarn-workspace-root: ^2.0.0
     mri: ^1.1.6
     toposort: ^2.0.2

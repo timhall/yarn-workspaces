@@ -2,23 +2,24 @@
 
 import { run } from '@timhall/cli';
 import dedent from '@timhall/dedent';
+import execa from 'execa';
 import mri from 'mri';
+import { listWorkspaces } from 'yarn-workspaces-list';
+import { findChangedWorkspaces } from '..';
 
 const help = dedent`
-  Usage: workspaces-changes <reference> [options]
+  List all changed workspaces as NDJSON (https://github.com/ndjson/ndjson-spec).
 
-  Options:
-    -v, --verbose   Show detailed workspace information
+  Usage: workspaces-changes <reference>
 `;
 
 run(async () => {
   const args = mri(process.argv.slice(2), {
-    alias: { h: 'help', v: 'verbose' },
-    boolean: ['verbose'],
+    alias: { h: 'help' },
+    boolean: ['help'],
   }) as {
     _: string[];
     help?: boolean;
-    verbose?: boolean;
   };
 
   if (args.help) {
@@ -26,7 +27,13 @@ run(async () => {
     return;
   }
 
-  const { verbose } = args;
+  const {
+    _: [reference],
+  } = args;
 
-  // TODO
+  const changed = await findChangedWorkspaces(reference);
+  for (const workspace of changed) {
+    const { name, location } = workspace;
+    console.log(JSON.stringify({ name, location }));
+  }
 });

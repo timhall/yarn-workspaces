@@ -1,14 +1,18 @@
 {
   "compilerOptions": {
-    "esModuleInterop": true,
     "strict": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
     "target": "es2019",
     "lib": ["es2019"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "typeRoots": ["node_modules/@types", "./typings"],
-    "declaration": true
+    "typeRoots": ["node_modules/@types"],
   },
   "exclude": ["node_modules", "**/__tests__/*.ts", "**/__fixtures__/*.ts"]
 }
