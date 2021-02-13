@@ -15,3 +15,15 @@ $ workspaces-list
 {"location":"packages/a","name":"@workspace/a",...}
 {"location":"packages/b","name":"@workspace/b","workspaceDependencies":["packages/a"],...}
 ```
+
+## API
+
+### `listWorkspaces([options])`
+
+Options:
+
+- `[cwd]`
+
+## CLI
+
+### `workspaces-list`

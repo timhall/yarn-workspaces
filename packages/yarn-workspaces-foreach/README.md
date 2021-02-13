@@ -12,7 +12,7 @@ await foreach('yarn build', { parallel: true, topological: true });
 $ workspaces-foreach -pt yarn build
 ```
 
-### foreach(command, options?)
+## CLI
 
 ### workspaces-foreach <command...> [options]
 
@@ -23,3 +23,7 @@ Options:
 - `--jobs <count>` / `-j <count>` number of parallel jobs to run
 - `--include` workspaces to include
 - `--exclude` workspaces to exclude
+
+## API
+
+### foreach(command, options?)

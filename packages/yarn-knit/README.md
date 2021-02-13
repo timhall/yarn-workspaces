@@ -2,9 +2,23 @@
 
 Intelligently build workspace dependencies.
 
-## `knit dependencies`
+## CLI
+
+### `knit dependencies`
 
 Build workspace dependencies for the current package
+
+```
+$ knit dependencies --help
+
+Build workspace dependencies for the current package
+
+Usage: knit dependencies [options]
+
+Options:
+  --parallel / -p   Build in parallel
+  --jobs / -j       Number of parallel jobs to use
+```
 
 Example:
 
@@ -19,9 +33,21 @@ Example:
 }
 ```
 
-## `knit workspace`
+### `knit workspace`
 
 Build workspace dependencies for the entire workspace
+
+```
+$ knit workspace --help
+
+Build workspace dependencies for the entire workspace
+
+Usage: knit workspace [options]
+
+Options:
+  --parallel / -p   Build in parallel
+  --jobs / -j       Number of parallel jobs to use
+```
 
 Example:
 
