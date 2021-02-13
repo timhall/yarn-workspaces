@@ -4,12 +4,17 @@ Workspace-aware change detection, compared to a git reference.
 
 ```
 $ changed -d master
-$ echo $? # 0 = unchanged, 1 = changed
+$ echo $? # 0 = unchanged, # = changed
 ```
 
 ## API
 
-### `isWorkspaceChanged(workspace, [reference], [options])`
+### `findWorkspaceChanges([reference], [options])`
+
+Options:
+
+- `includeDependencies`
+- `cwd`
 
 ## CLI
 

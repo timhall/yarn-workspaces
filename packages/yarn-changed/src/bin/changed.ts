@@ -41,5 +41,5 @@ run(async () => {
     console.log(relative(process.cwd(), change));
   }
 
-  process.exit(changed.length ? 1 : 0);
+  process.exit(changed.length);
 });
