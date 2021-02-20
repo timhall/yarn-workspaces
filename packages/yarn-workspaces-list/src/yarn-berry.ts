@@ -1,7 +1,7 @@
+import execa from 'execa';
 import findWorkspaceRoot from 'find-yarn-workspace-root';
 import { join } from 'path';
 import { loadTransitiveDependencies } from './dependencies';
-import { exec } from './utils/child-process';
 import { Name, RelativePath, Workspace } from './workspace';
 
 interface CliOptions {
@@ -15,9 +15,11 @@ interface ListInfo {
   mismatchedWorkspaceDependencies: RelativePath[];
 }
 
+const NEWLINE = /\r|\n/;
+
 export async function isBerry(options: CliOptions = {}): Promise<boolean> {
   const { cwd = process.cwd() } = options;
-  const { stdout } = await exec(`yarn --version`, { cwd });
+  const { stdout } = await execa('yarn', ['--version'], { cwd });
 
   return /2\./.test(stdout);
 }
@@ -30,9 +32,10 @@ export async function list(options: CliOptions = {}): Promise<Workspace[]> {
     throw new Error(`Could not find workspace root for ${cwd}`);
   }
 
-  const { stdout } = await exec(`yarn workspaces list --verbose --json`, { cwd });
+  const { stdout } = await execa('yarn', ['workspaces', 'list', '--verbose', '--json'], { cwd });
   const list = stdout
-    .split('\n')
+    .split(NEWLINE)
+    .map(trim)
     .filter(Boolean)
     .map((line) => JSON.parse(line) as ListInfo);
 
@@ -54,4 +57,8 @@ export async function list(options: CliOptions = {}): Promise<Workspace[]> {
   loadTransitiveDependencies(workspaces);
 
   return workspaces;
+}
+
+function trim(value: string): string {
+  return value.trim();
 }

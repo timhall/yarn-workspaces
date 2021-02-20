@@ -1,7 +1,7 @@
+import execa from 'execa';
 import findWorkspaceRoot from 'find-yarn-workspace-root';
 import { join } from 'path';
 import { loadTransitiveDependencies } from './dependencies';
-import { exec } from './utils/child-process';
 import { readJson } from './utils/fs';
 import { RelativePath, Workspace } from './workspace';
 
@@ -11,7 +11,7 @@ interface CliOptions {
 
 export async function isClassic(options: CliOptions = {}): Promise<boolean> {
   const { cwd = process.cwd() } = options;
-  const { stdout } = await exec(`yarn --version`, { cwd });
+  const { stdout } = await execa('yarn', ['--version'], { cwd });
 
   return /1\./.test(stdout);
 }
@@ -31,7 +31,7 @@ interface Info {
 
 export async function info(options: CliOptions = {}): Promise<Workspace[]> {
   const { cwd = process.cwd() } = options;
-  const { stdout } = await exec(`yarn --json workspaces info`, { cwd });
+  const { stdout } = await execa('yarn', ['--json', 'workspaces', 'info'], { cwd });
 
   const lines = stdout
     .split('\n')

@@ -1,0 +1,6 @@
+{
+  "name": "@fixtures/a",
+  "dependencies": {
+    "@fixtures/transitive": "workspace:*"
+  }
+}
