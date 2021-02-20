@@ -27,6 +27,7 @@ export async function findWorkspaceChanges(
     cwd: rootDir,
   });
   const diff = rawDiff.split(NEWLINE);
+  console.log('diff', diff);
 
   // Find untracked changes
   const { stdout: rawUntracked } = await execa(

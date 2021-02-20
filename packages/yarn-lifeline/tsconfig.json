@@ -1,8 +1,10 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "lib"
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["**/__tests__/*.ts", "**/__fixtures__/*.ts"],
+  "references": [{ "path": "../yarn-fingerprint" }, { "path": "../yarn-workspaces-list" }]
 }

@@ -7,7 +7,7 @@
   "scripts": {
     "build": "yarn workspaces foreach -ptv run build",
     "test": "jest",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --build --noEmit",
     "clean": "del-cli \"**/lib\" \"!node_modules/**/lib\""
   },
   "prettier": {

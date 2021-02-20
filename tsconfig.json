@@ -1,19 +1,11 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "target": "es2019",
-    "lib": ["es2019"],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "incremental": true,
-    "isolatedModules": true,
-    "composite": true,
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "typeRoots": ["node_modules/@types"],
-  },
-  "exclude": ["node_modules", "**/__tests__/*.ts", "**/__fixtures__/*.ts"]
+  "extends": "./tsconfig.base.json",
+  "references": [
+    { "path": "packages/yarn-changed" },
+    { "path": "packages/yarn-fingerprint" },
+    { "path": "packages/yarn-knit" },
+    { "path": "packages/yarn-lifeline" },
+    { "path": "packages/yarn-workspaces-foreach" },
+    { "path": "packages/yarn-workspaces-list" }
+  ]
 }
