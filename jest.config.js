@@ -1,3 +1,5 @@
 module.exports = {
-  projects: ['<rootDir>/packages/*']
+  testEnvironment: 'node',
+  testRunner: 'jest-circus/runner',
+  projects: ['<rootDir>/packages/*'],
 };

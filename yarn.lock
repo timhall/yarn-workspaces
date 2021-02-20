@@ -1910,6 +1910,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/tar-fs@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@types/tar-fs@npm:2.0.0"
+  dependencies:
+    "@types/node": "*"
+    "@types/tar-stream": "*"
+  checksum: ba8a64443b4b05187708c582011f0ecb6cfe84bb7a486c417320443b8f807d859a327b4d140374f9b2db01651ee66ba06ed3e59b5e9a6fc7068bad6c1962a052
+  languageName: node
+  linkType: hard
+
+"@types/tar-stream@npm:*":
+  version: 2.2.0
+  resolution: "@types/tar-stream@npm:2.2.0"
+  dependencies:
+    "@types/node": "*"
+  checksum: 6faf159b1845e64f425a8efb3a18ccb915a2ca42296e076b09116d1891ab4672d78a212fb25f66a8720c2aed82f8cac884efe54521a88937659ff3347b91f143
+  languageName: node
+  linkType: hard
+
 "@types/toposort@npm:^2.0.3":
   version: 2.0.3
   resolution: "@types/toposort@npm:2.0.3"
@@ -1932,6 +1951,20 @@ __metadata:
   checksum: fa1a5b0a07dbbff1657a27d1191d586632412d170321000f6f417f279547a8c191d7058dbf4d4187c188a5a1aeb2473ddb25fe316b206fccdfe1de6fad976619
   languageName: node
   linkType: hard
+
+"@yarn-lifeline/s3@workspace:packages/yarn-lifeline-s3":
+  version: 0.0.0-use.local
+  resolution: "@yarn-lifeline/s3@workspace:packages/yarn-lifeline-s3"
+  dependencies:
+    "@jest/globals": ^26.6.2
+    debug: ^4.3.1
+    jest: ^26.6.3
+    jest-circus: ^26.6.3
+    ts-jest: ^26.5.0
+    typescript: ^4.1.3
+    yarn-lifeline: "workspace:*"
+  languageName: unknown
+  linkType: soft
 
 "@zkochan/cmd-shim@npm:^3.1.0":
   version: 3.1.0
@@ -2411,6 +2444,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"base64-js@npm:^1.3.1":
+  version: 1.5.1
+  resolution: "base64-js@npm:1.5.1"
+  checksum: c1b41a26ddc6620eb7f1ee6c29c812f5942a4e328e74263f995872cfb8ca3aee08542beb25cd10fd7ef16e4f16603e25c35a26e776c01fd55277e5035e829e0e
+  languageName: node
+  linkType: hard
+
 "base@npm:^0.11.1":
   version: 0.11.2
   resolution: "base@npm:0.11.2"
@@ -2439,6 +2479,17 @@ __metadata:
   version: 2.1.0
   resolution: "before-after-hook@npm:2.1.0"
   checksum: 4df7ef0992ef7c5d8689a50bba12349789ab6da12203cd92c78dd5eb22e725694fd3602cff15ab85285a744c5d6106f3fbdc203f0cb6262cd3bebe42a763c3fd
+  languageName: node
+  linkType: hard
+
+"bl@npm:^4.0.3":
+  version: 4.1.0
+  resolution: "bl@npm:4.1.0"
+  dependencies:
+    buffer: ^5.5.0
+    inherits: ^2.0.4
+    readable-stream: ^3.4.0
+  checksum: 15d009339c2eeaedb9dab39c48f910a2fd6a9ba11400e61990917ebf3b25fa32cd9b80c7531a95467078258f6a59bd3f5d93323565423a7843855a16a1794261
   languageName: node
   linkType: hard
 
@@ -2522,6 +2573,16 @@ __metadata:
   version: 1.1.1
   resolution: "buffer-from@npm:1.1.1"
   checksum: 540ceb79c4f5bfcadaabbc18324fa84c50dc52905084be7c03596a339cf5a88513bee6831ce9b36ddd046fab09257a7c80686e129d0559a0cfd141da196ad956
+  languageName: node
+  linkType: hard
+
+"buffer@npm:^5.5.0":
+  version: 5.7.1
+  resolution: "buffer@npm:5.7.1"
+  dependencies:
+    base64-js: ^1.3.1
+    ieee754: ^1.1.13
+  checksum: 1750ac396eb36e0157ff5299509723ac0681338ef6cd40b039bc86d59c8b9a9494e99db992836eb6d637de0b270b53ec1a62d4a1c9faeaa51468cc340e553984
   languageName: node
   linkType: hard
 
@@ -3598,7 +3659,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"end-of-stream@npm:^1.0.0, end-of-stream@npm:^1.1.0":
+"end-of-stream@npm:^1.0.0, end-of-stream@npm:^1.1.0, end-of-stream@npm:^1.4.1":
   version: 1.4.4
   resolution: "end-of-stream@npm:1.4.4"
   dependencies:
@@ -4131,6 +4192,13 @@ __metadata:
     inherits: ^2.0.1
     readable-stream: ^2.0.0
   checksum: 5f1a9bbff02d30cf5b4f12cfef20b47455876f8318b92d275ca39e3c5adf0636d3a0d8f4821a1c245339c47e79a551dce9ce5c7d9236c16347b934dc13d1d408
+  languageName: node
+  linkType: hard
+
+"fs-constants@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "fs-constants@npm:1.0.0"
+  checksum: b8382395f555012591b20bddf08d258723f660b4e7312943d10431a893e2af879295fefc15a917df43c9ed52d80d2f014c0ca8ca359367969be5c8a133e39742
   languageName: node
   linkType: hard
 
@@ -4708,6 +4776,13 @@ fsevents@^2.1.2:
   dependencies:
     safer-buffer: ">= 2.1.2 < 3.0.0"
   checksum: 0785670120f57b5912c6a4391d6a69914906746d259b59de884dc6d324a52a0abde38d5804f67370192fec6878d01e7306de525568abcea70eb41c2bceb9f547
+  languageName: node
+  linkType: hard
+
+"ieee754@npm:^1.1.13":
+  version: 1.2.1
+  resolution: "ieee754@npm:1.2.1"
+  checksum: 6c1cfab995ecab3b0dbb6cfb7e192686eb02f0f8e788f2d962e1fc02e2d5ab38a85e06d417221f136bd029663a77cdb920d99605d68d3730a05597dd7910426a
   languageName: node
   linkType: hard
 
@@ -5340,6 +5415,35 @@ fsevents@^2.1.2:
     execa: ^4.0.0
     throat: ^5.0.0
   checksum: b15a1c524b32b16694aaa4b2823266b89b54dddbb7c37ed0fdea605ea79ee784ce1003dc6163aa041d47453dfa32e21a4ade56b464d58459cdaa8e2291c83d12
+  languageName: node
+  linkType: hard
+
+"jest-circus@npm:^26.6.3":
+  version: 26.6.3
+  resolution: "jest-circus@npm:26.6.3"
+  dependencies:
+    "@babel/traverse": ^7.1.0
+    "@jest/environment": ^26.6.2
+    "@jest/test-result": ^26.6.2
+    "@jest/types": ^26.6.2
+    "@types/babel__traverse": ^7.0.4
+    "@types/node": "*"
+    chalk: ^4.0.0
+    co: ^4.6.0
+    dedent: ^0.7.0
+    expect: ^26.6.2
+    is-generator-fn: ^2.0.0
+    jest-each: ^26.6.2
+    jest-matcher-utils: ^26.6.2
+    jest-message-util: ^26.6.2
+    jest-runner: ^26.6.3
+    jest-runtime: ^26.6.3
+    jest-snapshot: ^26.6.2
+    jest-util: ^26.6.2
+    pretty-format: ^26.6.2
+    stack-utils: ^2.0.2
+    throat: ^5.0.0
+  checksum: 8ef70b1ccd0837d19131889fcf4e7ed4d6f051a9140be71eb3536dd98d80ab4ab31dd5d445300f08f6e8d0bd6588e77159d53ea4fda808c5e55eb464755d1837
   languageName: node
   linkType: hard
 
@@ -6591,6 +6695,13 @@ fsevents@^2.1.2:
     for-in: ^1.0.2
     is-extendable: ^1.0.1
   checksum: 68da98bc1af57ffccde7abdc86ac49feec263b73b3c483ab7e6e2fab9aa2b06fba075da9e86bcda725133c1d2a59e4c810a17b55865c67c827871c25d5713c33
+  languageName: node
+  linkType: hard
+
+"mkdirp-classic@npm:^0.5.2":
+  version: 0.5.3
+  resolution: "mkdirp-classic@npm:0.5.3"
+  checksum: b3c46c62840bdc82c2a5bee417e4e7518a8109d32a85a6dc67bdcfecbe6aff5cfc73cdb98844a61178ddd8ac75743f977857f0badd6e12d14fd18cf1639e41a1
   languageName: node
   linkType: hard
 
@@ -7904,7 +8015,7 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"readable-stream@npm:2 || 3, readable-stream@npm:^3.0.2":
+"readable-stream@npm:2 || 3, readable-stream@npm:^3.0.2, readable-stream@npm:^3.1.1, readable-stream@npm:^3.4.0":
   version: 3.6.0
   resolution: "readable-stream@npm:3.6.0"
   dependencies:
@@ -8910,6 +9021,31 @@ fsevents@^2.1.2:
   version: 3.2.4
   resolution: "symbol-tree@npm:3.2.4"
   checksum: 0b9af4e5f005f9f0b9c916d91a1b654422ffa49ef09c5c4b6efa7a778f63976be9f410e57db1e9ea7576eea0631a34b69a5622674aa92a60a896ccf2afca87a7
+  languageName: node
+  linkType: hard
+
+"tar-fs@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "tar-fs@npm:2.1.1"
+  dependencies:
+    chownr: ^1.1.1
+    mkdirp-classic: ^0.5.2
+    pump: ^3.0.0
+    tar-stream: ^2.1.4
+  checksum: 4739382487b6ed646670a52cac637c818ecdceb728eb4718847dfdaddd7322d8cce2ea9db160ba8ad2920194034fda7c307b44f4eeb50d244f198bd7e28f2914
+  languageName: node
+  linkType: hard
+
+"tar-stream@npm:^2.1.4":
+  version: 2.2.0
+  resolution: "tar-stream@npm:2.2.0"
+  dependencies:
+    bl: ^4.0.3
+    end-of-stream: ^1.4.1
+    fs-constants: ^1.0.0
+    inherits: ^2.0.3
+    readable-stream: ^3.1.1
+  checksum: 7eec0a7fc8d0337729c1c2356d567a7527141d6ba0dd4804db979e17fc6389163e70fd4abdb855fc5ab54b944aeff7988e35e95ab6cee34a4156ca2d42980576
   languageName: node
   linkType: hard
 
@@ -9924,14 +10060,18 @@ typescript@^4.1.3:
   version: 0.0.0-use.local
   resolution: "yarn-fingerprint@workspace:packages/yarn-fingerprint"
   dependencies:
+    "@jest/globals": ^26.6.2
     "@timhall/cli": ^0.5.0
     "@timhall/dedent": ^0.10.0
     debug: ^4.3.1
     find-up: ^5.0.0
     find-yarn-workspace-root: ^2.0.0
     ignore: ^5.1.8
+    jest: ^26.6.3
+    jest-circus: ^26.6.3
     multibase: ^3.1.1
     multihashes: ^3.1.2
+    ts-jest: ^26.5.0
     typescript: ^4.1.3
     yarn-workspaces-list: "workspace:*"
   bin:
@@ -9943,10 +10083,14 @@ typescript@^4.1.3:
   version: 0.0.0-use.local
   resolution: "yarn-knit@workspace:packages/yarn-knit"
   dependencies:
+    "@jest/globals": ^26.6.2
     "@timhall/cli": ^0.5.0
     "@timhall/dedent": ^0.10.0
     debug: ^4.3.1
+    jest: ^26.6.3
+    jest-circus: ^26.6.3
     mri: ^1.1.6
+    ts-jest: ^26.5.0
     typescript: ^4.1.3
     yarn-workspaces-foreach: "workspace:*"
     yarn-workspaces-list: "workspace:*"
@@ -9955,20 +10099,26 @@ typescript@^4.1.3:
   languageName: unknown
   linkType: soft
 
-"yarn-lifeline@workspace:packages/yarn-lifeline":
+"yarn-lifeline@workspace:*, yarn-lifeline@workspace:packages/yarn-lifeline":
   version: 0.0.0-use.local
   resolution: "yarn-lifeline@workspace:packages/yarn-lifeline"
   dependencies:
+    "@jest/globals": ^26.6.2
     "@timhall/cli": ^0.5.0
     "@timhall/dedent": ^0.10.0
+    "@types/tar-fs": ^2.0.0
     cosmiconfig: ^7.0.0
     debug: ^4.3.1
     execa: ^5.0.0
     find-cache-dir: ^3.3.1
     find-yarn-workspace-root: ^2.0.0
     fs-extra: ^9.1.0
+    jest: ^26.6.3
+    jest-circus: ^26.6.3
     micromatch: ^4.0.2
     mri: ^1.1.6
+    tar-fs: ^2.1.1
+    ts-jest: ^26.5.0
     typescript: ^4.1.3
     yarn-fingerprint: "workspace:*"
     yarn-workspaces-list: "workspace:*"
@@ -9981,10 +10131,14 @@ typescript@^4.1.3:
   version: 0.0.0-use.local
   resolution: "yarn-workspaces-changed@workspace:packages/yarn-changed"
   dependencies:
+    "@jest/globals": ^26.6.2
     "@timhall/cli": ^0.5.0
     "@timhall/dedent": ^0.10.0
     execa: ^5.0.0
     find-yarn-workspace-root: ^2.0.0
+    jest: ^26.6.3
+    jest-circus: ^26.6.3
+    ts-jest: ^26.5.0
     typescript: ^4.1.3
     yarn-workspaces-list: "workspace:*"
   bin:
@@ -9997,12 +10151,16 @@ typescript@^4.1.3:
   version: 0.0.0-use.local
   resolution: "yarn-workspaces-foreach@workspace:packages/yarn-workspaces-foreach"
   dependencies:
+    "@jest/globals": ^26.6.2
     "@timhall/cli": ^0.5.0
     "@timhall/dedent": ^0.10.0
     execa: ^5.0.0
     find-yarn-workspace-root: ^2.0.0
+    jest: ^26.6.3
+    jest-circus: ^26.6.3
     mri: ^1.1.6
     p-limit: ^3.1.0
+    ts-jest: ^26.5.0
     typescript: ^4.1.3
     yarn-workspaces-list: "workspace:*"
   bin:
@@ -10014,11 +10172,16 @@ typescript@^4.1.3:
   version: 0.0.0-use.local
   resolution: "yarn-workspaces-list@workspace:packages/yarn-workspaces-list"
   dependencies:
+    "@jest/globals": ^26.6.2
     "@timhall/cli": ^0.5.0
     "@timhall/dedent": ^0.10.0
+    execa: ^5.0.0
     find-yarn-workspace-root: ^2.0.0
+    jest: ^26.6.3
+    jest-circus: ^26.6.3
     mri: ^1.1.6
     toposort: ^2.0.2
+    ts-jest: ^26.5.0
     typescript: ^4.1.3
   bin:
     workspaces-list: lib/bin/workspaces-list.js

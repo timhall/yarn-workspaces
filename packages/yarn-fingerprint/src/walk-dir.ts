@@ -17,7 +17,7 @@ export async function* walkDir(
   options: WalkOptions = {}
 ): AsyncGenerator<PathProperties> {
   const { filter } = options;
-  const paths = (await readdir(dir)).sort(ascending).map(relativePath => join(dir, relativePath));
+  const paths = (await readdir(dir)).sort(ascending).map((relativePath) => join(dir, relativePath));
 
   for (const path of paths) {
     if (filter && !filter(path)) continue;
@@ -30,7 +30,7 @@ export async function* walkDir(
 function ascending(a: any, b: any): -1 | 0 | 1 {
   if (a < b) {
     return -1;
-  } else if (b > a) {
+  } else if (a > b) {
     return 1;
   } else {
     return 0;

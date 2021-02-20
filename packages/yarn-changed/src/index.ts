@@ -26,7 +26,7 @@ export async function findWorkspaceChanges(
   const { stdout: rawDiff } = await execa('git', ['diff', '--name-only', reference], {
     cwd: rootDir,
   });
-  const diff = rawDiff.split(NEWLINE);
+  const diff = rawDiff.split(NEWLINE).map(trim).filter(Boolean);
 
   // Find untracked changes
   const { stdout: rawUntracked } = await execa(
@@ -36,7 +36,7 @@ export async function findWorkspaceChanges(
       cwd: rootDir,
     }
   );
-  const untracked = rawUntracked.split(NEWLINE);
+  const untracked = rawUntracked.split(NEWLINE).map(trim).filter(Boolean);
 
   const files = [...diff, ...untracked].map((relative) => join(rootDir, relative));
 
@@ -66,7 +66,7 @@ function isRelevantChange(workspace: Workspace): (path: string) => boolean {
   return (path: string) => YARN_LOCK.test(path) || path.startsWith(workspace.path);
 }
 
-function unique() {
+function unique(): (value: unknown) => boolean {
   const seen = new Set();
 
   return (value: unknown) => {
@@ -75,4 +75,8 @@ function unique() {
     seen.add(value);
     return true;
   };
+}
+
+function trim(value: string): string {
+  return value.trim();
 }

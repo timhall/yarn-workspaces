@@ -16,9 +16,9 @@
     "workspaces-changed": "lib/bin/workspaces-changed.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --build",
     "test": "jest",
-    "prepublishOnly": "tsc"
+    "prepublishOnly": "tsc --build"
   },
   "dependencies": {
     "@timhall/cli": "^0.5.0",
@@ -28,6 +28,10 @@
     "yarn-workspaces-list": "workspace:*"
   },
   "devDependencies": {
+    "@jest/globals": "^26.6.2",
+    "jest": "^26.6.3",
+    "jest-circus": "^26.6.3",
+    "ts-jest": "^26.5.0",
     "typescript": "^4.1.3"
   },
   "files": [

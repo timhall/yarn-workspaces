@@ -1,7 +1,7 @@
 import _debug from 'debug';
 import execa from 'execa';
-import { copy } from 'fs-extra';
-import { add as cacheAdd, show as cacheShow } from './cache';
+import { Cache } from './cache';
+import { CommandOutput, CommandResult } from './command';
 import { Config } from './config';
 import { fingerprint as fingerprintDir } from './fingerprint';
 
@@ -12,35 +12,60 @@ export interface Options {
   shell?: string | boolean;
 }
 
-export async function run(command: string, config: Config, options: Options = {}) {
-  const { cwd = process.cwd(), shell = true } = options;
+export async function runWithCache(
+  command: string,
+  config: Config,
+  options: Options = {}
+): Promise<void> {
+  const { cwd = process.cwd() } = options;
 
-  // 1. Check current fingerprint
+  const cache = new Cache(config);
+
+  // Calculate current fingerprint
   const fingerprint = await fingerprintDir(cwd, config);
-  debug(`Fingerprint: ${fingerprint}`);
+  debug(`fingerprint: ${fingerprint}`);
 
-  // 2. Check for fingerprint in cache
-  const maybeCachedDir = await cacheShow(fingerprint, config);
+  if (await cache.has(fingerprint)) {
+    // Attempt to restore if cached
+    try {
+      debug(`restoring from cache`);
+      await cache.restore(fingerprint, cwd);
 
-  // 3. Restore from cache to output
-  if (maybeCachedDir && !process.env.LIFELINE_DISABLE_CACHE) {
-    debug(`Restoring from cache ${maybeCachedDir}`);
-    await copy(maybeCachedDir, config.output, { overwrite: true });
-    return;
+      return;
+    } catch (error) {
+      // (ignore error)
+      console.log(`[yarn-lifeline] Failed to restore from cache`, error);
+    }
   }
 
-  // 4. Run command
-  debug(`Running ${command}`);
+  // Run command and cache
+  const result = await run(command, options);
+  await cache.add(cwd, result, fingerprint);
+}
+
+export async function run(command: string, options: Options = {}): Promise<CommandResult> {
+  const { cwd = process.cwd(), shell = true } = options;
+
   const subprocess = execa.command(command, { cwd, shell, preferLocal: true });
-  subprocess.stdout?.pipe(process.stdout);
-  subprocess.stderr?.pipe(process.stderr);
+
+  const output: CommandOutput[] = [];
+  subprocess.stdout?.on('data', (chunk) => {
+    process.stdout.push(chunk);
+
+    const value = Buffer.from(chunk).toString('utf8');
+    output.push({ source: 'stdout', value });
+  });
+  subprocess.stderr?.on('data', (chunk) => {
+    process.stderr.push(chunk);
+
+    const value = Buffer.from(chunk).toString('utf8');
+    output.push({ source: 'stderr', value });
+  });
 
   const { exitCode } = await subprocess;
   if (exitCode !== 0) {
-    debug(`Command exited with ${exitCode}`);
     process.exit(exitCode);
   }
 
-  // 5. Cache output
-  await cacheAdd(fingerprint, config);
+  return { output };
 }

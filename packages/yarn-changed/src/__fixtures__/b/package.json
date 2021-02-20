@@ -1,0 +1,6 @@
+{
+  "name": "@fixtures/b",
+  "dependencies": {
+    "@fixtures/a": "workspace:*"
+  }
+}

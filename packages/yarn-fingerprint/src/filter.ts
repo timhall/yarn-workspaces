@@ -46,9 +46,7 @@ export async function findGitignores(dir: string): Promise<string[]> {
 export async function gitignoreToFilter(gitignorePath: string): Promise<Filter> {
   const dir = dirname(gitignorePath);
   const gitignore = await readFile(gitignorePath, 'utf8');
-  const filter = createIgnore()
-    .add(gitignore)
-    .createFilter();
+  const filter = createIgnore().add(gitignore).createFilter();
 
   // Resolve absolute paths to gitignore directory for relative filter
   return (absolutePath: string) => {
@@ -62,7 +60,7 @@ export function combineFilters(...allFilters: Array<Filter | undefined>): Filter
 
   return (path: string) => {
     // Return false if any filter returns false
-    return !filters.some(filter => !filter(path));
+    return !filters.some((filter) => !filter(path));
   };
 }
 

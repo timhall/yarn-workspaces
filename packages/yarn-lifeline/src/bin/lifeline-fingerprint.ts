@@ -1,7 +1,7 @@
 import dedent from '@timhall/dedent';
 import mri from 'mri';
 import { loadConfig } from '../config';
-import { fingerprint as fingerprintDir } from '../fingerprint';
+import { fingerprint as fingerprintDir } from '../';
 
 const help = dedent`
   Compute fingerprint for current project
@@ -9,7 +9,7 @@ const help = dedent`
   Usage: lifeline fingerprint
 `;
 
-export default async function(argv: string[]): Promise<void> {
+export default async function (argv: string[]): Promise<void> {
   const args = mri(argv, { alias: { h: 'help' } });
   const cwd = process.cwd();
 

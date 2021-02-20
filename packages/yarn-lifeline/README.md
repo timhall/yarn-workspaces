@@ -22,14 +22,33 @@ Example:
 ```js
 // lifeline.config.js
 module.exports = {
+  // Source files/directories
   // (default: uses .gitignore)
   source: ['src/**/*.js', 'package.json', 'package-lock.json'],
 
-  // (default: dist)
+  // Output files/directories
+  // (default: 'dist')
   output: 'lib',
 
+  // Local cache directory
   // (default: node_modules/.cache)
   cache: '.cache',
+
+  // Include dependencies in fingerprint
+  // (default: false)
+  dependencies: true
+
+  // Use external cache sources
+  // (default: undefined)
+  remote: {
+    require: '@yarn-lifeline/s3',
+    options: {
+      bucket: '...'
+    }
+  }
+
+  // or (for lifeline.config.js only)
+  remote: require('@yarn-lifeline/s3')({ bucket: '...' })
 };
 ```
 
@@ -39,7 +58,7 @@ module.exports = {
 
 Compute fingerprint for current source and if cached output exists restore it, otherwise run command and cache output.
 
-Use `LIFELINE_DISABLE_CACHE=1` to skip checking the cache for run.
+Use `LIFELINE_NO_CACHE=1` or `NO_CACHE=1` to temporarily skip caching.
 
 ### `lifeline fingerprint`
 

@@ -6,5 +6,5 @@
   },
   "include": ["src/**/*.ts"],
   "exclude": ["**/__tests__/*.ts", "**/__fixtures__/*.ts"],
-  "references": [{ "path": "../yarn-fingerprint" }, { "path": "../yarn-workspaces-list" }]
+  "references": [{ "path": "../yarn-lifeline" }]
 }

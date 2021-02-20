@@ -9,8 +9,13 @@ import { pathExists } from './fs';
 
 const debug = _debug('yarn-fingerprint');
 
-export async function fingerprintWorkspace(dir: string, options: Options = {}): Promise<string> {
-  const { algorithm, encoding } = options;
+export type FingerprintWorkspaceOptions = Options & { includeDependencies?: boolean };
+
+export async function fingerprintWorkspace(
+  dir: string,
+  options: FingerprintWorkspaceOptions = {}
+): Promise<string> {
+  const { algorithm, encoding, includeDependencies = true } = options;
 
   // Fingerprint = workspace + yarn.lock + dependent workspaces
   const workspaceFingerprint = await fingerprintDir(dir, options);
@@ -20,6 +25,16 @@ export async function fingerprintWorkspace(dir: string, options: Options = {}): 
   // ignore filter for lockfile and dependencies
   const lockfileFingerprint = await fingerprintLockfile(dir, { algorithm, encoding });
   debug('lockfile', lockfileFingerprint);
+
+  if (!includeDependencies) {
+    const fingerprint = mergeFingerprints([workspaceFingerprint, lockfileFingerprint], {
+      algorithm,
+      encoding,
+    });
+    debug('fingerprint', dir, fingerprint);
+
+    return fingerprint;
+  }
 
   const workspace = await loadWorkspace(dir);
   const workspaces = await listWorkspacesByName({ cwd: dir });
