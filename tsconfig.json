@@ -5,6 +5,7 @@
     "lib": ["es2019"],
     "module": "commonjs",
     "moduleResolution": "node",
+    "incremental": true,
     "isolatedModules": true,
     "composite": true,
     "declaration": true,

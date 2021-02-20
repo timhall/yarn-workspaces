@@ -1,6 +1,6 @@
 import dedent from '@timhall/dedent';
 import mri from 'mri';
-import { clear } from '..';
+import { clearLocalCache } from '..';
 import { loadConfig } from '../config';
 
 const help = dedent`
@@ -9,7 +9,7 @@ const help = dedent`
   Usage: lifeline cache clear
 `;
 
-export default async function(argv: string[]): Promise<void> {
+export default async function (argv: string[]): Promise<void> {
   const cwd = process.cwd();
   const args = mri(argv, { alias: { h: 'help' } });
 
@@ -19,5 +19,5 @@ export default async function(argv: string[]): Promise<void> {
   }
 
   const config = await loadConfig(cwd);
-  await clear(config);
+  await clearLocalCache(config);
 }

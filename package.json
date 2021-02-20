@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "yarn workspaces foreach -t run build",
+    "build": "yarn workspaces foreach -ptv run build",
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "clean": "del-cli \"**/lib\" \"!node_modules/**/lib\""
