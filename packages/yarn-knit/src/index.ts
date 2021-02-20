@@ -20,7 +20,7 @@ export async function dependencies(options: Options = {}) {
   if (process.env.YARN_KNIT_ACTIVE) {
     return;
   } else {
-    process.env.YARN_KNIT_ACTIVE = 'yes';
+    process.env.YARN_KNIT_ACTIVE = '1';
   }
 
   // Load workspace
@@ -49,7 +49,7 @@ export async function workspace(options: Options = {}) {
   if (process.env.YARN_KNIT_ACTIVE) {
     return;
   } else {
-    process.env.YARN_KNIT_ACTIVE = 'yes';
+    process.env.YARN_KNIT_ACTIVE = '1';
   }
 
   // For `knit workspace` build all workspace packages that are dependencies
@@ -79,14 +79,13 @@ export async function workspace(options: Options = {}) {
   }
 }
 
-function unique<TValue = any>(): (value: TValue) => boolean {
-  const seen = new Set<TValue>();
-  return (value: TValue) => {
-    if (seen.has(value)) {
-      return false;
-    } else {
-      seen.add(value);
-      return true;
-    }
+function unique(): (value: unknown) => boolean {
+  const seen = new Set();
+
+  return (value: unknown) => {
+    if (seen.has(value)) return false;
+
+    seen.add(value);
+    return true;
   };
 }

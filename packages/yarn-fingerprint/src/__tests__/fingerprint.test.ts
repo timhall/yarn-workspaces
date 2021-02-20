@@ -1,3 +1,4 @@
+import { test, expect } from '@jest/globals';
 import { join, relative } from 'path';
 import { decode, encode } from '../encode';
 import { createGitignoreFilter, findGitignores } from '../filter';

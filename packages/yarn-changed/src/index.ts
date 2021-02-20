@@ -66,7 +66,7 @@ function isRelevantChange(workspace: Workspace): (path: string) => boolean {
   return (path: string) => YARN_LOCK.test(path) || path.startsWith(workspace.path);
 }
 
-function unique() {
+function unique(): (value: unknown) => boolean {
   const seen = new Set();
 
   return (value: unknown) => {
