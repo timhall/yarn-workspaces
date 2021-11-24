@@ -13,7 +13,7 @@ export async function isClassic(options: CliOptions = {}): Promise<boolean> {
   const { cwd = process.cwd() } = options;
   const { stdout } = await exec(`yarn --version`, { cwd });
 
-  return /1\./.test(stdout);
+  return /^1\./.test(stdout);
 }
 
 interface JsonLine {
