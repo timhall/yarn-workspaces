@@ -19,7 +19,7 @@ export async function isBerry(options: CliOptions = {}): Promise<boolean> {
   const { cwd = process.cwd() } = options;
   const { stdout } = await exec(`yarn --version`, { cwd });
 
-  return /2\./.test(stdout);
+  return /^2\.|^3\./.test(stdout);
 }
 
 export async function list(options: CliOptions = {}): Promise<Workspace[]> {
